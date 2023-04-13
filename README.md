@@ -1,6 +1,6 @@
 # Coursework for WAD2023 @ HTW Berlin
 
-Team LoBe: Louis beul & Bettina Justus :octocat:
+Team **LoBe**: Louis Beul & Bettina Justus :octocat:
 
 # Project Roadmap
 
@@ -14,7 +14,7 @@ Team LoBe: Louis beul & Bettina Justus :octocat:
 - no Backend
 - no DB/Server
 - 2 hardcoded users in JS
-- 4-6 hardcoded locations in JS
+- 4 to 6 hardcoded locations in JS
 
 ### Increment 03:
 
