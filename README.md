@@ -20,3 +20,7 @@ Team **LoBe**: Louis Beul & Bettina Justus :octocat:
 
 - add nodeJS Backend
 - add mongoDB
+
+# Miscellaneous
+
+The `/.gitignore` was created using [gitignore.io](https://gitignore.io) and ignores all binary/config files related vim, vscode, nodeJS, and macOS.
