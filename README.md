@@ -4,6 +4,19 @@ Team **LoBe**: Louis Beul & Bettina Justus :octocat:
 
 # Project Roadmap
 
+## General Idea
+
+- An interactive map of Berlin that shows climate-related information, i.e.
+  - ecologically destructive locations (e.g. fossile power plants)
+  - missing green infrastrcuture (e.g. missing park&ride spots)
+
+## Technical Outline
+
+- Single Page Application (SPA)
+- Front end in vanilla JS, HTML, and CSS
+- Back end in nodeJS
+- 2 user roles: admin & normal
+
 ### Increment 01:
 
 - Static HTML & CSS
