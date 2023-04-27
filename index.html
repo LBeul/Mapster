@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/home.css" />
+    <link rel="stylesheet" href="./styles/login.css" />
     <title>GreenBerlin</title>
   </head>
   <body>
@@ -17,8 +19,44 @@
       </nav>
     </header>
     <main>
-      <div class="home-container container">Home</div>
-      <div class="login-container container">Login</div>
+      <!--
+        Willkommen-Nachricht an die User-Person
+        Bild einer Berlin-Karte oder Interaktive Karte mit Markierung in Berlin
+        Links neben der Karte eine Liste von drei hart-kodierten Locations
+        Button „Add“
+        Button „Logout“
+        Fußzeile mit Impressum und Datenschutzerklärung
+      -->
+      <section class="home-container container">
+        <h1>Welcome to Mapster!</h1>
+        <p>Description of Mapster bla bla bla</p>
+        <p>soon: Berlin map</p>
+        <h3>Locations</h3>
+        <ul>
+          <li>eins</li>
+          <li>zwei</li>
+          <li>drei</li>
+        </ul>
+        <button>Add</button>
+        <button>Logout</button>
+        <p>Impressum & Datenschutzerklärung</p>
+      </section>
+
+      <!-- 
+        Name Ihrer Webapplikation 
+        Eingabefeld für Username (required) 
+        Eingabefeld für Password (required) 
+        Button „Login“
+      -->
+      <section class="login-container container">
+        <h1>Mapster</h1>
+        <label>Username</label>
+        <input type="text" />
+        <label>Password</label>
+        <input type="password" />
+        <button>Login</button>
+      </section>
+
       <div class="addloc-container container">Add location</div>
       <div class="updateloc-container container">Update Location</div>
     </main>
