@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/location.css" />
     <title>GreenBerlin</title>
   </head>
   <body>
@@ -17,10 +18,171 @@
       </nav>
     </header>
     <main>
-      <div class="home-container container">Home</div>
-      <div class="login-container container">Login</div>
-      <div class="addloc-container container">Add location</div>
-      <div class="updateloc-container container">Update Location</div>
+      <section class="home-container container">Home</section>
+      <section class="login-container container">Login</section>
+      <!-- ADD LOACTION SCREEN -->
+      <section class="location-container container">
+        <div class="container-title">
+          <h1>Location hinzufügen</h1>
+        </div>
+        <form class="location-form">
+          <div class="input-container">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Kohletagebau  Wedding"
+              required
+            />
+          </div>
+          <div class="input-container">
+            <label for="description">Beschreibung</label>
+            <input
+              type="text"
+              name="description"
+              placeholder="Massive Umweltbelastung"
+            />
+          </div>
+          <div class="input-container">
+            <label for="street">Straße & Hausnummer</label>
+            <input
+              type="text"
+              name="street"
+              placeholder="Hauptstraße 1"
+              required
+            />
+          </div>
+          <div class="input-container">
+            <label for="zipcode">Postleitzahl</label>
+            <input type="text" name="zipcode" placeholder="12489" required />
+          </div>
+          <div class="input-container">
+            <label for="city">Stadt</label>
+            <input type="text" name="city" placeholder="Berlin" required />
+          </div>
+          <div class="input-container">
+            <label for="latitude">Breitengrad</label>
+            <input type="number" name="latitude" placeholder="52.516275" />
+          </div>
+          <div class="input-container">
+            <label for="longitude">Längengrad</label>
+            <input type="number" name="longitude" placeholder="13.377704" />
+          </div>
+          <div class="input-container">
+            <label for="picture">Foto</label>
+            <input type="file" name="picture" accept="image/*" />
+          </div>
+          <div class="input-container">
+            <label for="pollution">Verschmutzungsgrad</label>
+            <input
+              type="number"
+              name="pollution"
+              placeholder="1 bis 10"
+              min="1"
+              max="10"
+            />
+          </div>
+          <input type="submit" name="Hinzufügen" class="twocol-btn" />
+          <input type="reset" name="Abbrechen" class="onecol-btn" />
+        </form>
+      </section>
+      <!-- UPDATE LOCATION SCREEN -->
+      <section class="location-container container">
+        <div class="container-title">
+          <h1>Location bearbeiten</h1>
+        </div>
+        <form class="location-form">
+          <div class="input-container">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Kohletagebau  Wedding"
+              value="Kohletagebau  Wedding"
+              required
+            />
+          </div>
+          <div class="input-container">
+            <label for="description">Beschreibung</label>
+            <input
+              type="text"
+              name="description"
+              placeholder="Massive Umweltbelastung"
+              value="Massive Umweltbelastung"
+            />
+          </div>
+          <div class="input-container">
+            <label for="street">Straße & Hausnummer</label>
+            <input
+              type="text"
+              name="street"
+              placeholder="Hauptstraße 1"
+              value="Hauptstraße 1"
+              required
+            />
+          </div>
+          <div class="input-container">
+            <label for="zipcode">Postleitzahl</label>
+            <input
+              type="text"
+              name="zipcode"
+              placeholder="12489"
+              value="12489"
+              required
+            />
+          </div>
+          <div class="input-container">
+            <label for="city">Stadt</label>
+            <input
+              type="text"
+              name="city"
+              placeholder="Berlin"
+              value="Berlin"
+              required
+            />
+          </div>
+          <div class="input-container">
+            <label for="latitude">Breitengrad</label>
+            <input
+              type="number"
+              name="latitude"
+              placeholder="52.516275"
+              value="52.516275"
+            />
+          </div>
+          <div class="input-container">
+            <label for="longitude">Längengrad</label>
+            <input
+              type="number"
+              name="longitude"
+              placeholder="13.377704"
+              value="13.377704"
+            />
+          </div>
+          <div class="input-container">
+            <label for="picture">Foto</label>
+            <input
+              type="file"
+              name="picture"
+              accept="image/*"
+              value="./assets/example.svg"
+            />
+          </div>
+          <div class="input-container">
+            <label for="pollution">Verschmutzungsgrad</label>
+            <input
+              type="number"
+              name="pollution"
+              placeholder="1 bis 10"
+              value="4"
+              min="1"
+              max="10"
+            />
+          </div>
+          <input type="submit" name="Hinzufügen" class="twocol-btn" />
+          <input type="reset" name="Abbrechen" class="onecol-btn" />
+        </form>
+      </section>
     </main>
   </body>
 </html>
