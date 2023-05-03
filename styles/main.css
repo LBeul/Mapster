@@ -77,13 +77,3 @@ nav {
   color: var(--warning);
   border: 1px solid var(--warning);
 }
-
-.addloc-container {
-  color: var(--success);
-  border: 1px solid var(--success);
-}
-
-.updateloc-container {
-  color: var(--danger);
-  border: 1px solid var(--danger);
-}
