@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/home.css" />
+    <link rel="stylesheet" href="./styles/login.css" />
     <link rel="stylesheet" href="./styles/location.css" />
-    <title>GreenBerlin</title>
+    <title>Mapster</title>
   </head>
   <body>
     <header>
@@ -18,10 +20,56 @@
       </nav>
     </header>
     <main>
-      <section class="home-container container">Home</section>
-      <section class="login-container container">Login</section>
+      <!-- MAIN SCREEN -->
+      <section class="container">
+        <div class="container-title" id="home-title">
+          <h1>Willkommen bei Mapster!</h1>
+          <p>
+            Hier findest du fehlende nachhaltige Infrastruktur Vorschläge für
+            Berlin.
+          </p>
+        </div>
+        <div class="home-content-wrapper">
+          <div class="content-row">
+            <div>
+              <h3>Locations</h3>
+              <ol>
+                <li>Rent a Bike Schöneweide</li>
+                <li>Mobiler Supermarkt Adlershof</li>
+                <li>E-Bike Ladesäulen Köpenick</li>
+              </ol>
+            </div>
+            <div>
+              <img class="map-container" src="./assets/map.jpg" />
+            </div>
+            <div>
+              <button>Add</button>
+              <button>Logout</button>
+            </div>
+          </div>
+          <div class="content-row">
+            <footer>Impressum & Datenschutzerklärung</footer>
+          </div>
+        </div>
+      </section>
+
+      <!-- LOGIN SCREEN -->
+      <section class="container">
+        <div class="container-title">
+          <h1>Mapster</h1>
+        </div>
+        <div class="content-row home-content-wrapper">
+          <div>
+            <label>Username</label>
+            <input type="text" />
+            <label>Password</label>
+            <input type="password" />
+          </div>
+          <button>Login</button>
+        </div>
+      </section>
       <!-- ADD LOACTION SCREEN -->
-      <section class="location-container container">
+      <section class="container">
         <div class="container-title">
           <h1>Location hinzufügen</h1>
         </div>
@@ -87,7 +135,7 @@
         </form>
       </section>
       <!-- UPDATE LOCATION SCREEN -->
-      <section class="location-container container">
+      <section class="container">
         <div class="container-title">
           <h1>Location bearbeiten</h1>
         </div>

@@ -61,16 +61,39 @@ nav {
   width: 50%;
 }
 
-.container {
-  margin: var(--container-padding);
-  padding: var(--container-padding);
-  border-radius: 10px;
-  font-weight: bold;
+footer {
+  font-size: 12px;
 }
 
-.home-container {
-  color: var(--cta);
-  border: 1px solid var(--cta);
+.container {
+  margin: var(--container-padding);
+  padding: 0 0;
+  border-radius: 10px;
+  font-weight: bold;
+  color: var(--brand-dark);
+  background-color: var(--white);
+  border: 1px solid var(--brand-dark);
+  display: flex;
+  padding: 0vh 5vw 0vh 0vh;
+}
+.container-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--brand-dark);
+  color: var(--white);
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  min-width: 350px;
+  max-width: 350px;
+}
+
+.content-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
 }
 
 .login-container {
