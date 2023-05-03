@@ -1,0 +1,15 @@
+.location-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 1em;
+  margin: var(--container-padding);
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.twocol-btn {
+  grid-column: span 2;
+}
