@@ -3,7 +3,7 @@
   flex-direction: row;
 }
 .map-container {
-  width: 600px;
+  width: 500px;
   height: auto;
   background-color: var(--danger);
 }
@@ -15,9 +15,17 @@
   margin: 2vh 0;
 }
 
+.btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 25%;
+}
+
 #home-title {
   flex-direction: column;
 }
+
 #home-title > p {
   text-align: center;
 }

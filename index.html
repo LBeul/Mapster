@@ -23,10 +23,10 @@
       <!-- MAIN SCREEN -->
       <section class="container">
         <div class="container-title" id="home-title">
-          <h1>Willkommen bei Mapster!</h1>
+          <h1>Willkommen bei Mapster</h1>
           <p>
-            Hier findest du fehlende nachhaltige Infrastruktur Vorschläge für
-            Berlin.
+            Die interaktive Sammlung von Vorschlägen für fehlende nachhaltige
+            Infrastruktur in Berlin
           </p>
         </div>
         <div class="home-content-wrapper">
@@ -42,9 +42,9 @@
             <div>
               <img class="map-container" src="./assets/map.jpg" />
             </div>
-            <div>
-              <button>Add</button>
-              <button>Logout</button>
+            <div class="btn-wrapper">
+              <button>Hinzufügen</button>
+              <button>Ausloggen</button>
             </div>
           </div>
           <div class="content-row">
@@ -52,21 +52,22 @@
           </div>
         </div>
       </section>
-
       <!-- LOGIN SCREEN -->
       <section class="container">
         <div class="container-title">
           <h1>Mapster</h1>
         </div>
-        <div class="content-row home-content-wrapper">
+        <form class="content-row">
           <div>
-            <label>Username</label>
-            <input type="text" />
-            <label>Password</label>
-            <input type="password" />
+            <label for="username">Nutzername</label>
+            <input type="text" name="username" required />
           </div>
-          <button>Login</button>
-        </div>
+          <div>
+            <label for="password">Passwort</label>
+            <input type="password" name="password" required />
+          </div>
+          <input type="submit" value="Einloggen" required />
+        </form>
       </section>
       <!-- ADD LOACTION SCREEN -->
       <section class="container">
@@ -130,8 +131,8 @@
               max="10"
             />
           </div>
-          <input type="submit" name="Hinzufügen" class="twocol-btn" />
-          <input type="reset" name="Abbrechen" class="onecol-btn" />
+          <input type="submit" value="Hinzufügen" class="twocol-btn" />
+          <input type="reset" value="Abbrechen" class="onecol-btn" />
         </form>
       </section>
       <!-- UPDATE LOCATION SCREEN -->
@@ -227,8 +228,8 @@
               max="10"
             />
           </div>
-          <input type="submit" name="Hinzufügen" class="twocol-btn" />
-          <input type="reset" name="Abbrechen" class="onecol-btn" />
+          <input type="submit" value="Hinzufügen" class="twocol-btn" />
+          <input type="reset" value="Abbrechen" class="onecol-btn" />
         </form>
       </section>
     </main>
