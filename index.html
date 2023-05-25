@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link rel="stylesheet" href="./styles/home.css" />
+    <link rel="stylesheet" href="./styles/login.css" />
+    <link rel="stylesheet" href="./styles/location.css" />
+    <title>Mapster</title>
+  </head>
+  <body>
+    <header>
+      <span>Mapster</span>
+      <nav>
+        <li>Home</li>
+        <li>Login</li>
+        <li>Add</li>
+        <li>Update</li>
+      </nav>
+    </header>
+    <main>
+      <!-- MAIN SCREEN -->
+      <section class="container">
+        <div class="container-title" id="home-title">
+          <h1>Willkommen bei Mapster</h1>
+          <p>
+            Die interaktive Sammlung von Vorschlägen für fehlende nachhaltige
+            Infrastruktur in Berlin
+          </p>
+        </div>
+        <div class="home-content-wrapper">
+          <div class="content-row">
+            <div>
+              <h3>Locations</h3>
+              <ol>
+                <li>Rent a Bike Schöneweide</li>
+                <li>Mobiler Supermarkt Adlershof</li>
+                <li>E-Bike Ladesäulen Köpenick</li>
+              </ol>
+            </div>
+            <div>
+              <img class="map-container" src="./assets/map.jpg" />
+            </div>
+            <div class="btn-wrapper">
+              <button>Hinzufügen</button>
+              <button>Ausloggen</button>
+            </div>
+          </div>
+          <div class="content-row">
+            <footer>Impressum & Datenschutzerklärung</footer>
+          </div>
+        </div>
+      </section>
+      <!-- LOGIN SCREEN -->
+      <section class="container">
+        <div class="container-title">
+          <h1>Mapster</h1>
+        </div>
+        <form class="content-row">
+          <div>
+            <label for="username">Nutzername</label>
+            <input type="text" name="username" required />
+          </div>
+          <div>
+            <label for="password">Passwort</label>
+            <input type="password" name="password" required />
+          </div>
+          <input type="submit" value="Einloggen" required />
+        </form>
+      </section>
+      <!-- ADD LOACTION SCREEN -->
+      <section class="container">
+        <div class="container-title">
+          <h1>Location hinzufügen</h1>
+        </div>
+        <form class="location-form">
+          <div class="input-container">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Kohletagebau  Wedding"
+              required
+            />
+          </div>
+          <div class="input-container">
+            <label for="description">Beschreibung</label>
+            <input
+              type="text"
+              name="description"
+              placeholder="Massive Umweltbelastung"
+            />
+          </div>
+          <div class="input-container">
+            <label for="street">Straße & Hausnummer</label>
+            <input
+              type="text"
+              name="street"
+              placeholder="Hauptstraße 1"
+              required
+            />
+          </div>
+          <div class="input-container">
+            <label for="zipcode">Postleitzahl</label>
+            <input type="text" name="zipcode" placeholder="12489" required />
+          </div>
+          <div class="input-container">
+            <label for="city">Stadt</label>
+            <input type="text" name="city" placeholder="Berlin" required />
+          </div>
+          <div class="input-container">
+            <label for="latitude">Breitengrad</label>
+            <input type="number" name="latitude" placeholder="52.516275" />
+          </div>
+          <div class="input-container">
+            <label for="longitude">Längengrad</label>
+            <input type="number" name="longitude" placeholder="13.377704" />
+          </div>
+          <div class="input-container">
+            <label for="picture">Foto</label>
+            <input type="file" name="picture" accept="image/*" />
+          </div>
+          <div class="input-container">
+            <label for="pollution">Verschmutzungsgrad</label>
+            <input
+              type="number"
+              name="pollution"
+              placeholder="1 bis 10"
+              min="1"
+              max="10"
+            />
+          </div>
+          <input type="submit" value="Hinzufügen" class="twocol-btn" />
+          <input type="reset" value="Abbrechen" class="onecol-btn" />
+        </form>
+      </section>
+      <!-- UPDATE LOCATION SCREEN -->
+      <section class="container">
+        <div class="container-title">
+          <h1>Location bearbeiten</h1>
+        </div>
+        <form class="location-form">
+          <div class="input-container">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              name="name"
+              placeholder="Kohletagebau  Wedding"
+              value="Kohletagebau  Wedding"
+              required
+            />
+          </div>
+          <div class="input-container">
+            <label for="description">Beschreibung</label>
+            <input
+              type="text"
+              name="description"
+              placeholder="Massive Umweltbelastung"
+              value="Massive Umweltbelastung"
+            />
+          </div>
+          <div class="input-container">
+            <label for="street">Straße & Hausnummer</label>
+            <input
+              type="text"
+              name="street"
+              placeholder="Hauptstraße 1"
+              value="Hauptstraße 1"
+              required
+            />
+          </div>
+          <div class="input-container">
+            <label for="zipcode">Postleitzahl</label>
+            <input
+              type="text"
+              name="zipcode"
+              placeholder="12489"
+              value="12489"
+              required
+            />
+          </div>
+          <div class="input-container">
+            <label for="city">Stadt</label>
+            <input
+              type="text"
+              name="city"
+              placeholder="Berlin"
+              value="Berlin"
+              required
+            />
+          </div>
+          <div class="input-container">
+            <label for="latitude">Breitengrad</label>
+            <input
+              type="number"
+              name="latitude"
+              placeholder="52.516275"
+              value="52.516275"
+            />
+          </div>
+          <div class="input-container">
+            <label for="longitude">Längengrad</label>
+            <input
+              type="number"
+              name="longitude"
+              placeholder="13.377704"
+              value="13.377704"
+            />
+          </div>
+          <div class="input-container">
+            <label for="picture">Foto</label>
+            <input
+              type="file"
+              name="picture"
+              accept="image/*"
+              value="./assets/example.svg"
+            />
+          </div>
+          <div class="input-container">
+            <label for="pollution">Verschmutzungsgrad</label>
+            <input
+              type="number"
+              name="pollution"
+              placeholder="1 bis 10"
+              value="4"
+              min="1"
+              max="10"
+            />
+          </div>
+          <input type="submit" value="Hinzufügen" class="twocol-btn" />
+          <input type="reset" value="Abbrechen" class="onecol-btn" />
+        </form>
+      </section>
+    </main>
+  </body>
+</html>
