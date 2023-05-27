@@ -1,11 +1,11 @@
 import { deactivateById, reactivateById } from './domHelper.js';
 
-const navigateToScreenById = (selectedScreen) => {
+const navigateToScreenById = (selectedScreen, isAdmin) => {
   const screens = [
-    'main_screen',
-    'add_screen',
-    'update_screen',
-    'login_screen',
+    'main-screen',
+    'add-screen',
+    'update-screen',
+    'login-screen',
   ];
 
   screens
@@ -15,4 +15,9 @@ const navigateToScreenById = (selectedScreen) => {
   reactivateById(selectedScreen);
 };
 
-export { navigateToScreenById };
+const navigateOnClick = (id, destination) => {
+  document.getElementById(id).onclick = (e) =>
+    navigateToScreenById(destination);
+};
+
+export { navigateToScreenById, navigateOnClick };

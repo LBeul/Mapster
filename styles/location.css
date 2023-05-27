@@ -2,12 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 1em;
-  margin: var(--container-padding);
-}
-
-.input-container {
-  display: flex;
-  flex-direction: column;
+  margin: 2vh 5vw;
 }
 
 .twocol-btn {

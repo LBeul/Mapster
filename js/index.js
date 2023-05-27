@@ -1,16 +1,31 @@
-import { isValidUserData } from './authService.js';
-import { getValueById, resetValueById } from './domHelper.js';
-import { navigateToScreenById } from './routingService.js';
+import { isAdmin, isValidUserData } from './authService.js';
+import {
+  activateAdminControls,
+  getValueById,
+  reactivateById,
+  resetValueById,
+  revokeAdminControls,
+} from './domHelper.js';
+import { navigateOnClick, navigateToScreenById } from './routingService.js';
 
 // Starting
 window.onload = initializeSPA;
 
 function initializeSPA() {
-  navigateToScreenById('login_screen');
+  navigateToScreenById('login-screen');
 
-  document.getElementById('login_form').onsubmit = clickLogin;
-  document.getElementById('navigate_to_add').onclick = (e) =>
-    navigateToScreenById('add_screen');
+  // Form Bindings
+  document.getElementById('login-form').onsubmit = clickLogin;
+
+  // Button Bindings
+  navigateOnClick('add-location-btn', 'add-screen');
+  document.getElementById('logout').onclick = clickLogout;
+  document
+    .querySelectorAll('.back-to-main')
+    .forEach(
+      (element) =>
+        (element.onclick = (e) => navigateToScreenById('main-screen'))
+    );
 }
 
 const clickLogin = (event) => {
@@ -18,10 +33,19 @@ const clickLogin = (event) => {
   const username = getValueById('username');
   const password = getValueById('password');
   if (isValidUserData(username, password)) {
-    navigateToScreenById('main_screen');
+    navigateToScreenById('main-screen');
+    if (isAdmin(username)) {
+      activateAdminControls();
+    }
   } else {
     alert('The provided credential combination does not exist');
   }
   resetValueById('username');
   resetValueById('password');
+};
+
+const clickLogout = (event) => {
+  event.preventDefault();
+  navigateToScreenById('login-screen');
+  revokeAdminControls();
 };

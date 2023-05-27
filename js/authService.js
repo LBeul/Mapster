@@ -28,4 +28,6 @@ const isValidUserData = (username, password) => {
   return false;
 };
 
-export { isValidUserData };
+const isAdmin = (name) => users.find((u) => u.id === name)?.isAdmin;
+
+export { isValidUserData, isAdmin };
