@@ -36,7 +36,6 @@
 
   /* GLOBAL VARIABLES */
   --container-padding: 2vh 5vw;
-  --max-mobile: 640px;
 }
 
 body {
@@ -46,28 +45,17 @@ body {
   color: var(--black);
 }
 
-header {
-  padding: var(--container-padding);
-  color: var(--white);
-  background-color: var(--brand);
-  display: flex;
-  justify-content: space-between;
-}
-
-nav {
-  display: flex;
-  justify-content: space-between;
-  list-style-type: none;
-  width: 50%;
-}
-
 footer {
   font-size: 12px;
+  height: 6vh;
+  background-color: var(--brand);
+  color: var(--white);
 }
 
 .container {
   margin: var(--container-padding);
   padding: 0 0;
+  height: 90vh;
   border-radius: 10px;
   font-weight: bold;
   color: var(--brand-dark);

@@ -7,21 +7,13 @@
     <link rel="stylesheet" href="./styles/home.css" />
     <link rel="stylesheet" href="./styles/login.css" />
     <link rel="stylesheet" href="./styles/location.css" />
+    <script type="module" src="./js/index.js"></script>
     <title>Mapster</title>
   </head>
   <body>
-    <header>
-      <span>Mapster</span>
-      <nav>
-        <li>Home</li>
-        <li>Login</li>
-        <li>Add</li>
-        <li>Update</li>
-      </nav>
-    </header>
     <main>
       <!-- MAIN SCREEN -->
-      <section class="container">
+      <section class="container" id="main_screen">
         <div class="container-title" id="home-title">
           <h1>Willkommen bei Mapster</h1>
           <p>
@@ -43,34 +35,31 @@
               <img class="map-container" src="./assets/map.jpg" />
             </div>
             <div class="btn-wrapper">
-              <button>Hinzufügen</button>
+              <button id="navigate_to_add">Hinzufügen</button>
               <button>Ausloggen</button>
             </div>
-          </div>
-          <div class="content-row">
-            <footer>Impressum & Datenschutzerklärung</footer>
           </div>
         </div>
       </section>
       <!-- LOGIN SCREEN -->
-      <section class="container">
+      <section class="container" id="login_screen">
         <div class="container-title">
           <h1>Mapster</h1>
         </div>
-        <form class="content-row">
+        <form class="content-row" id="login_form">
           <div>
             <label for="username">Nutzername</label>
-            <input type="text" name="username" required />
+            <input type="text" id="username" required />
           </div>
           <div>
             <label for="password">Passwort</label>
-            <input type="password" name="password" required />
+            <input type="password" id="password" required />
           </div>
           <input type="submit" value="Einloggen" required />
         </form>
       </section>
       <!-- ADD LOACTION SCREEN -->
-      <section class="container">
+      <section class="container" id="add_screen">
         <div class="container-title">
           <h1>Location hinzufügen</h1>
         </div>
@@ -79,7 +68,7 @@
             <label for="name">Name</label>
             <input
               type="text"
-              name="name"
+              id="name"
               placeholder="Kohletagebau  Wedding"
               required
             />
@@ -88,7 +77,7 @@
             <label for="description">Beschreibung</label>
             <input
               type="text"
-              name="description"
+              id="description"
               placeholder="Massive Umweltbelastung"
             />
           </div>
@@ -96,36 +85,36 @@
             <label for="street">Straße & Hausnummer</label>
             <input
               type="text"
-              name="street"
+              id="street"
               placeholder="Hauptstraße 1"
               required
             />
           </div>
           <div class="input-container">
             <label for="zipcode">Postleitzahl</label>
-            <input type="text" name="zipcode" placeholder="12489" required />
+            <input type="text" id="zipcode" placeholder="12489" required />
           </div>
           <div class="input-container">
             <label for="city">Stadt</label>
-            <input type="text" name="city" placeholder="Berlin" required />
+            <input type="text" id="city" placeholder="Berlin" required />
           </div>
           <div class="input-container">
             <label for="latitude">Breitengrad</label>
-            <input type="number" name="latitude" placeholder="52.516275" />
+            <input type="number" id="latitude" placeholder="52.516275" />
           </div>
           <div class="input-container">
             <label for="longitude">Längengrad</label>
-            <input type="number" name="longitude" placeholder="13.377704" />
+            <input type="number" id="longitude" placeholder="13.377704" />
           </div>
           <div class="input-container">
             <label for="picture">Foto</label>
-            <input type="file" name="picture" accept="image/*" />
+            <input type="file" id="picture" accept="image/*" />
           </div>
           <div class="input-container">
             <label for="pollution">Verschmutzungsgrad</label>
             <input
               type="number"
-              name="pollution"
+              id="pollution"
               placeholder="1 bis 10"
               min="1"
               max="10"
@@ -136,92 +125,92 @@
         </form>
       </section>
       <!-- UPDATE LOCATION SCREEN -->
-      <section class="container">
+      <section class="container" id="update_screen">
         <div class="container-title">
           <h1>Location bearbeiten</h1>
         </div>
         <form class="location-form">
           <div class="input-container">
-            <label for="name">Name</label>
+            <label for="modify_name">Name</label>
             <input
               type="text"
-              name="name"
+              id="modify_name"
               placeholder="Kohletagebau  Wedding"
               value="Kohletagebau  Wedding"
               required
             />
           </div>
           <div class="input-container">
-            <label for="description">Beschreibung</label>
+            <label for="modify_description">Beschreibung</label>
             <input
               type="text"
-              name="description"
+              id="modify_description"
               placeholder="Massive Umweltbelastung"
               value="Massive Umweltbelastung"
             />
           </div>
           <div class="input-container">
-            <label for="street">Straße & Hausnummer</label>
+            <label for="modify_street">Straße & Hausnummer</label>
             <input
               type="text"
-              name="street"
+              id="modify_street"
               placeholder="Hauptstraße 1"
               value="Hauptstraße 1"
               required
             />
           </div>
           <div class="input-container">
-            <label for="zipcode">Postleitzahl</label>
+            <label for="modify_zipcode">Postleitzahl</label>
             <input
               type="text"
-              name="zipcode"
+              id="modify_zipcode"
               placeholder="12489"
               value="12489"
               required
             />
           </div>
           <div class="input-container">
-            <label for="city">Stadt</label>
+            <label for="modify_city">Stadt</label>
             <input
               type="text"
-              name="city"
+              id="modify_city"
               placeholder="Berlin"
               value="Berlin"
               required
             />
           </div>
           <div class="input-container">
-            <label for="latitude">Breitengrad</label>
+            <label for="modify_latitude">Breitengrad</label>
             <input
               type="number"
-              name="latitude"
+              id="modify_latitude"
               placeholder="52.516275"
               value="52.516275"
             />
           </div>
           <div class="input-container">
-            <label for="longitude">Längengrad</label>
+            <label for="modify_longitude">Längengrad</label>
             <input
               type="number"
-              name="longitude"
+              id="modify_longitude"
               placeholder="13.377704"
               value="13.377704"
             />
           </div>
           <div class="input-container">
-            <label for="picture">Foto</label>
+            <label for="modify_picture">Foto</label>
             <input
               type="file"
-              name="picture"
+              id="modify_picture"
               accept="image/*"
               value="./assets/example.svg"
             />
           </div>
           <div class="input-container">
-            <label for="pollution">Verschmutzungsgrad</label>
+            <label for="modify_pollution">Verschmutzungsgrad</label>
             <input
               type="number"
-              name="pollution"
+              id="modify_pollution"
               placeholder="1 bis 10"
               value="4"
               min="1"
@@ -232,6 +221,7 @@
           <input type="reset" value="Abbrechen" class="onecol-btn" />
         </form>
       </section>
+      <footer class="content-row">Impressum & Datenschutzerklärung</footer>
     </main>
   </body>
 </html>
