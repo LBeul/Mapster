@@ -1,0 +1,10 @@
+#login-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em;
+  margin: 2vh 5vw;
+}
+
+#login-btn {
+  grid-column: span 2;
+}
