@@ -8,3 +8,8 @@
 .twocol-btn {
   grid-column: span 2;
 }
+
+#modify-btn {
+  display: flex;
+  justify-content: center;
+}

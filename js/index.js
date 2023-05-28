@@ -20,12 +20,12 @@ function initializeSPA() {
   // Button Bindings
   navigateOnClick('add-location-btn', 'add-screen');
   document.getElementById('logout').onclick = clickLogout;
-  document
-    .querySelectorAll('.back-to-main')
-    .forEach(
-      (element) =>
-        (element.onclick = (e) => navigateToScreenById('main-screen'))
-    );
+  document.querySelectorAll('.back-to-main').forEach((element) => {
+    element.onclick = (e) => navigateToScreenById('main-screen');
+  });
+  document.querySelectorAll('.details-button').forEach((element) => {
+    element.onclick = (e) => navigateToScreenById('update-screen');
+  });
 }
 
 const clickLogin = (event) => {

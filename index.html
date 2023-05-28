@@ -32,7 +32,7 @@
                     <div class="li-title">Rent a Bike Schöneweide</div>
                     <div class="li-addess">Sterndamm 34, Schöneweide</div>
                     <div class="li-score">98%</div>
-                    <button class="edit-button">edit</button>
+                    <button class="details-button">Details</button>
                   </div>
                 </li>
                 <li>
@@ -41,7 +41,7 @@
                     <div class="li-title">Mobiler Supermarkt</div>
                     <div class="li-addess">Marktplatz Adlershof</div>
                     <div class="li-score">33%</div>
-                    <button class="edit-button">edit</button>
+                    <button class="details-button">Details</button>
                   </div>
                 </li>
                 <li>
@@ -50,7 +50,7 @@
                     <div class="li-title">E-Bike Ladesäulen</div>
                     <div class="li-addess">Rathaus, Köpenik</div>
                     <div class="li-score">70%</div>
-                    <button class="edit-button">edit</button>
+                    <button class="details-button">Details</button>
                   </div>
                 </li>
               </ul>
@@ -154,7 +154,7 @@
       <!-- UPDATE LOCATION SCREEN -->
       <section class="container" id="update-screen">
         <div class="container-title">
-          <h1>Location bearbeiten</h1>
+          <h1>Location Details</h1>
         </div>
         <form class="location-form">
           <div class="flex-col">
@@ -164,6 +164,7 @@
               id="modify-name"
               placeholder="Kohletagebau  Wedding"
               value="Kohletagebau  Wedding"
+              disabled
               required
             />
           </div>
@@ -174,6 +175,7 @@
               id="modify-description"
               placeholder="Massive Umweltbelastung"
               value="Massive Umweltbelastung"
+              disabled
             />
           </div>
           <div class="flex-col">
@@ -184,6 +186,7 @@
               placeholder="Hauptstraße 1"
               value="Hauptstraße 1"
               required
+              disabled
             />
           </div>
           <div class="flex-col">
@@ -194,6 +197,7 @@
               placeholder="12489"
               value="12489"
               required
+              disabled
             />
           </div>
           <div class="flex-col">
@@ -204,6 +208,7 @@
               placeholder="Berlin"
               value="Berlin"
               required
+              disabled
             />
           </div>
           <div class="flex-col">
@@ -213,6 +218,7 @@
               id="modify-latitude"
               placeholder="52.516275"
               value="52.516275"
+              disabled
             />
           </div>
           <div class="flex-col">
@@ -222,6 +228,7 @@
               id="modify-longitude"
               placeholder="13.377704"
               value="13.377704"
+              disabled
             />
           </div>
           <div class="flex-col">
@@ -231,6 +238,7 @@
               id="modify-picture"
               accept="image/*"
               value="./assets/example.svg"
+              disabled
             />
           </div>
           <div class="flex-col">
@@ -242,14 +250,17 @@
               value="4"
               min="1"
               max="10"
+              disabled
             />
           </div>
-          <input type="submit" value="Hinzufügen" class="twocol-btn" />
           <input
-            type="reset"
-            value="Abbrechen"
-            class="onecol-btn back-to-main"
+            id="modify-btn"
+            type="submit"
+            value="Hinzufügen"
+            class="twocol-btn"
+            hidden
           />
+          <input type="reset" value="Zurück" class="onecol-btn back-to-main" />
         </form>
       </section>
       <footer>Impressum & Datenschutzerklärung</footer>
