@@ -19,9 +19,13 @@ const resetValueById = (id) => {
   document.getElementById(id).value = '';
 };
 
+const setValueById = (id, value) => {
+  document.getElementById(id).value = value;
+};
+
 const activateAdminControls = () => {
   reactivateById('add-location-btn');
-  enabledById('modify-name');
+  enabledById('modify-title');
   enabledById('modify-description');
   enabledById('modify-street');
   enabledById('modify-zipcode');
@@ -35,7 +39,7 @@ const activateAdminControls = () => {
 
 const revokeAdminControls = () => {
   deactivateById('add-location-btn');
-  disabledById('modify-name');
+  disabledById('modify-title');
   disabledById('modify-description');
   disabledById('modify-street');
   disabledById('modify-zipcode');
@@ -52,6 +56,7 @@ export {
   reactivateById,
   getValueById,
   resetValueById,
+  setValueById,
   activateAdminControls,
   revokeAdminControls,
 };

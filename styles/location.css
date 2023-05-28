@@ -9,7 +9,11 @@
   grid-column: span 2;
 }
 
-#modify-btn {
+.onecol-btn {
   display: flex;
   justify-content: center;
+}
+
+#delete-btn {
+  background-color: var(--danger);
 }

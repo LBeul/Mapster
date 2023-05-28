@@ -3,11 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Custom styles & script -->
     <link rel="stylesheet" href="./styles/index.css" />
     <link rel="stylesheet" href="./styles/main.css" />
     <link rel="stylesheet" href="./styles/login.css" />
     <link rel="stylesheet" href="./styles/location.css" />
     <script type="module" src="./js/index.js"></script>
+    <!-- Leaflet styles & script -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
     <title>Mapster</title>
   </head>
   <body>
@@ -23,37 +36,9 @@
         </div>
         <div class="flex-col">
           <div class="flex-row">
-            <img class="map" src="./assets/map.jpg" />
+            <div id="map"></div>
             <aside class="map-legend">
-              <ul>
-                <li>
-                  <div class="li-number">1</div>
-                  <div class="li-content">
-                    <div class="li-title">Rent a Bike Schöneweide</div>
-                    <div class="li-addess">Sterndamm 34, Schöneweide</div>
-                    <div class="li-score">98%</div>
-                    <button class="details-button">Details</button>
-                  </div>
-                </li>
-                <li>
-                  <div class="li-number">2</div>
-                  <div class="li-content">
-                    <div class="li-title">Mobiler Supermarkt</div>
-                    <div class="li-addess">Marktplatz Adlershof</div>
-                    <div class="li-score">33%</div>
-                    <button class="details-button">Details</button>
-                  </div>
-                </li>
-                <li>
-                  <div class="li-number">3</div>
-                  <div class="li-content">
-                    <div class="li-title">E-Bike Ladesäulen</div>
-                    <div class="li-addess">Rathaus, Köpenik</div>
-                    <div class="li-score">70%</div>
-                    <button class="details-button">Details</button>
-                  </div>
-                </li>
-              </ul>
+              <ul id="locations-list"></ul>
               <div class="flex-row legend-buttons">
                 <button class="simple-btn" id="add-location-btn">
                   Hinzufügen
@@ -85,58 +70,73 @@
           <h1>Location hinzufügen</h1>
         </div>
         <div class="container-content">
-          <form class="location-form">
+          <form id="add-loc-form" class="location-form">
             <div class="flex-col">
-              <label for="name">Name</label>
+              <label for="add-title">Name</label>
               <input
                 type="text"
-                id="name"
+                id="add-title"
                 placeholder="Kohletagebau  Wedding"
                 required
               />
             </div>
             <div class="flex-col">
-              <label for="description">Beschreibung</label>
+              <label for="add-description">Beschreibung</label>
               <input
                 type="text"
-                id="description"
+                id="add-description"
                 placeholder="Massive Umweltbelastung"
               />
             </div>
             <div class="flex-col">
-              <label for="street">Straße & Hausnummer</label>
+              <label for="add-street">Straße & Hausnummer</label>
               <input
                 type="text"
-                id="street"
+                id="add-street"
                 placeholder="Hauptstraße 1"
                 required
               />
             </div>
             <div class="flex-col">
-              <label for="zipcode">Postleitzahl</label>
-              <input type="text" id="zipcode" placeholder="12489" required />
+              <label for="add-zipcode">Postleitzahl</label>
+              <input
+                type="text"
+                id="add-zipcode"
+                placeholder="12489"
+                required
+              />
             </div>
             <div class="flex-col">
-              <label for="city">Stadt</label>
-              <input type="text" id="city" placeholder="Berlin" required />
+              <label for="add-city">Stadt</label>
+              <input type="text" id="add-city" placeholder="Berlin" required />
             </div>
             <div class="flex-col">
-              <label for="latitude">Breitengrad</label>
-              <input type="number" id="latitude" placeholder="52.516275" />
-            </div>
-            <div class="flex-col">
-              <label for="longitude">Längengrad</label>
-              <input type="number" id="longitude" placeholder="13.377704" />
-            </div>
-            <div class="flex-col">
-              <label for="picture">Foto</label>
-              <input type="file" id="picture" accept="image/*" />
-            </div>
-            <div class="flex-col">
-              <label for="pollution">Verschmutzungsgrad</label>
+              <label for="add-latitude">Breitengrad</label>
               <input
                 type="number"
-                id="pollution"
+                step="any"
+                id="add-latitude"
+                placeholder="52.516275"
+              />
+            </div>
+            <div class="flex-col">
+              <label for="add-longitude">Längengrad</label>
+              <input
+                type="number"
+                step="any"
+                id="add-longitude"
+                placeholder="13.377704"
+              />
+            </div>
+            <div class="flex-col">
+              <label for="add-picture">Foto</label>
+              <input type="file" id="add-picture" accept="image/*" />
+            </div>
+            <div class="flex-col">
+              <label for="add-pollution">Verschmutzungsgrad</label>
+              <input
+                type="number"
+                id="add-pollution"
                 placeholder="1 bis 10"
                 min="1"
                 max="10"
@@ -156,12 +156,12 @@
         <div class="container-title">
           <h1>Location Details</h1>
         </div>
-        <form class="location-form">
+        <form id="update-loc-form" class="location-form">
           <div class="flex-col">
-            <label for="modify-name">Name</label>
+            <label for="modify-title">Name</label>
             <input
               type="text"
-              id="modify-name"
+              id="modify-title"
               placeholder="Kohletagebau  Wedding"
               value="Kohletagebau  Wedding"
               disabled
@@ -215,6 +215,7 @@
             <label for="modify-latitude">Breitengrad</label>
             <input
               type="number"
+              step="any"
               id="modify-latitude"
               placeholder="52.516275"
               value="52.516275"
@@ -225,6 +226,7 @@
             <label for="modify-longitude">Längengrad</label>
             <input
               type="number"
+              step="any"
               id="modify-longitude"
               placeholder="13.377704"
               value="13.377704"
@@ -256,8 +258,15 @@
           <input
             id="modify-btn"
             type="submit"
-            value="Hinzufügen"
-            class="twocol-btn"
+            value="Überschreiben"
+            class="onecol-btn"
+            hidden
+          />
+          <input
+            id="delete-btn"
+            type="button"
+            value="Löschen"
+            class="onecol-btn"
             hidden
           />
           <input type="reset" value="Zurück" class="onecol-btn back-to-main" />
@@ -265,5 +274,6 @@
       </section>
       <footer>Impressum & Datenschutzerklärung</footer>
     </main>
+    <script type="module" src="./js/mapService.js"></script>
   </body>
 </html>
