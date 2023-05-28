@@ -19,10 +19,9 @@ const users = [
 const isValidUserData = (username, password) => {
   const user = users.find((u) => u.id === username);
   if (user) {
-    console.log(
-      `${user.password === password ? 'Correct' : 'Wrong'} password entered.`
-    );
-    return user.password === password;
+    const isCorrectPwd = user.password === password;
+    console.log(`${isCorrectPwd ? 'Correct' : 'Wrong'} password entered.`);
+    return isCorrectPwd;
   }
   console.log(`User ${username} does not exist.`);
   return false;

@@ -42,14 +42,14 @@ const addLocation = (newLocation) => {
 };
 
 const removeLocation = (id) => {
-  locations = locations.filter((l) => l.id !== id);
+  locations = locations.filter((l) => l.id != id);
   nukeAndRebuildLocationsList();
 };
 
 const updateLocation = (modifiedLocation) => {
   const { id } = modifiedLocation;
   removeLocation(id);
-  locations = [locations, ...modifiedLocation];
+  locations = [...locations, modifiedLocation];
   nukeAndRebuildLocationsList();
 };
 
@@ -100,18 +100,22 @@ const createLocationListItem = (location) => {
 };
 
 function nukeAndRebuildLocationsList() {
-  // empty current list
+  // nuke
   const locationsList = document.getElementById('locations-list');
   locationsList.innerHTML = '';
-  // append new children
-  locations.forEach((loc) => {
-    locationsList.appendChild(createLocationListItem(loc));
-  });
+  // rebuild
+  locations
+    .sort((a, b) => (a.id < b.id ? -1 : 1))
+    .forEach((loc) => {
+      locationsList.appendChild(createLocationListItem(loc));
+    });
 }
 
 const navigateToPrefilledDetails = (element, location) => {
   element.onclick = (e) => {
-    const { title, description, street, zipcode, lat, lon, score } = location;
+    e?.preventDefault();
+    const { id, title, description, street, zipcode, lat, lon, score } =
+      location;
     setValueById('modify-title', title);
     setValueById('modify-description', description);
     setValueById('modify-street', street);
@@ -120,6 +124,7 @@ const navigateToPrefilledDetails = (element, location) => {
     setValueById('modify-latitude', lat);
     setValueById('modify-longitude', lon);
     setValueById('modify-pollution', score);
+    document.getElementById('hidden-id-field').innerText = id;
 
     navigateToScreenById('update-screen');
   };

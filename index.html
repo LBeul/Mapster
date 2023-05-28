@@ -108,7 +108,14 @@
             </div>
             <div class="flex-col">
               <label for="add-city">Stadt</label>
-              <input type="text" id="add-city" placeholder="Berlin" required />
+              <input
+                type="text"
+                id="add-city"
+                placeholder="Berlin"
+                value="Berlin"
+                required
+                disabled
+              />
             </div>
             <div class="flex-col">
               <label for="add-latitude">Breitengrad</label>
@@ -158,6 +165,7 @@
         </div>
         <form id="update-loc-form" class="location-form">
           <div class="flex-col">
+            <div id="hidden-id-field" hidden></div>
             <label for="modify-title">Name</label>
             <input
               type="text"
