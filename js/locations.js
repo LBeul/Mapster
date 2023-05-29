@@ -38,19 +38,19 @@ const getIncrementalID = () => Math.max(...locations.map((loc) => loc.id)) + 1;
 
 const addLocation = (newLocation) => {
   locations = [...locations, newLocation];
-  nukeAndRebuildLocationsList();
+  refreshLocationsList();
 };
 
 const removeLocation = (id) => {
   locations = locations.filter((l) => l.id != id);
-  nukeAndRebuildLocationsList();
+  refreshLocationsList();
 };
 
 const updateLocation = (modifiedLocation) => {
   const { id } = modifiedLocation;
   removeLocation(id);
   locations = [...locations, modifiedLocation];
-  nukeAndRebuildLocationsList();
+  refreshLocationsList();
 };
 
 const createLocationListItem = (location) => {
@@ -99,11 +99,11 @@ const createLocationListItem = (location) => {
   return listItem;
 };
 
-function nukeAndRebuildLocationsList() {
-  // nuke
+function refreshLocationsList() {
+  // nuke existing locationsList
   const locationsList = document.getElementById('locations-list');
   locationsList.innerHTML = '';
-  // rebuild
+  // rebuild sorted locationsList from array
   locations
     .sort((a, b) => (a.id < b.id ? -1 : 1))
     .forEach((loc) => {
@@ -137,5 +137,5 @@ export {
   updateLocation,
   locations,
   createLocationListItem,
-  nukeAndRebuildLocationsList,
+  refreshLocationsList,
 };

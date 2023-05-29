@@ -3,28 +3,25 @@ import {
   activateAdminControls,
   getFormValuesById,
   getValueById,
-  resetAddForm,
   resetValueById,
   revokeAdminControls,
 } from './domHelper.js';
+import {
+  getAddressAndAddLocation,
+  getAddressAndUpdateLocation,
+  getCoordsAndAddLocation,
+  getCoordsAndUpdateLocation,
+} from './geoService.js';
 import { removeLocation } from './locations.js';
-import {
-  addLocation,
-  nukeAndRebuildLocationsList,
-  updateLocation,
-} from './locations.js';
-import {
-  addLocationMarker,
-  deleteLocationMarker,
-  updateLocationMarker,
-} from './mapService.js';
+import { refreshLocationsList } from './locations.js';
+import { deleteLocationMarker } from './mapService.js';
 import { navigateOnClick, navigateToScreenById } from './routingService.js';
 
 // Initialize SPA
 window.onload = () => {
   navigateToScreenById('login-screen');
   // Initial load of stored Locations
-  nukeAndRebuildLocationsList();
+  refreshLocationsList();
   // Form Bindings
   document.getElementById('login-form').onsubmit = clickLogin;
   document.getElementById('add-loc-form').onsubmit = clickAddLocation;
@@ -63,7 +60,6 @@ const clickLogout = (event) => {
 const clickAddLocation = (event) => {
   event.preventDefault();
   const locationInput = getFormValuesById('add-loc-form');
-
   const hasAdress = locationInput.street && locationInput.zipCode;
   const hasCoords = locationInput.lat && locationInput.lon;
 
@@ -76,58 +72,18 @@ const clickAddLocation = (event) => {
   }
 };
 
-const getCoordsAndAddLocation = (locationWithoutCoords) => {
-  const { street, zipCode } = locationWithoutCoords;
-  const addressString = `${street}, ${zipCode} Berlin`;
-  const url = `https://nominatim.openstreetmap.org/search?q=${addressString}&format=json`;
-
-  fetch(url)
-    .then((response) => response.json())
-    .catch((err) => console.log('Connecting to ' + url + ' failed!'))
-    .then((geoData) => {
-      const { lat, lon } = geoData[0];
-      const newLocation = { ...locationWithoutCoords, lat, lon };
-      console.log(newLocation);
-      addLocation(newLocation);
-      addLocationMarker(newLocation);
-      navigateToScreenById('main-screen');
-      resetAddForm();
-    });
-};
-
-const getAddressAndAddLocation = (locationWithoutAddress) => {
-  const { lat, lon } = locationWithoutAddress;
-  const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`;
-
-  fetch(url)
-    .then((response) => response.json())
-    .catch((err) => console.log('Connecting to ' + url + ' failed!'))
-    .then((geoData) => {
-      const { road, city, postcode } = geoData.address;
-      if (city !== 'Berlin') {
-        console.log(city);
-        alert('Gegebene Koordinaten liegen außerhalb Berlins.');
-      } else {
-        const newLocation = {
-          ...locationWithoutAddress,
-          street: road,
-          zipcode: postcode,
-        };
-        console.log(newLocation);
-        addLocation(newLocation);
-        addLocationMarker(newLocation);
-        navigateToScreenById('main-screen');
-        resetAddForm();
-      }
-    });
-};
-
 const clickModifyLocation = (event) => {
   event.preventDefault();
-  const newLocation = getFormValuesById('update-loc-form');
-  updateLocation(newLocation);
-  updateLocationMarker(newLocation);
-  navigateToScreenById('main-screen');
+  const locationInput = getFormValuesById('update-loc-form');
+  const hasAdress = locationInput.street && locationInput.zipCode;
+  const hasCoords = locationInput.lat && locationInput.lon;
+  if (hasAdress) {
+    getCoordsAndUpdateLocation(locationInput);
+  } else if (hasCoords) {
+    getAddressAndUpdateLocation(locationInput);
+  } else {
+    alert('Bitte entweder Straße und PLZ oder Längen-/Breitengrad eintragen.');
+  }
 };
 
 const clickDeleteLocation = (event) => {

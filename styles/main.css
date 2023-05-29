@@ -1,7 +1,6 @@
 #map {
   height: 80vh;
   width: 70vw;
-  background-color: var(--danger);
 }
 
 .map-legend {
