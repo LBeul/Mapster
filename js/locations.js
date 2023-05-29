@@ -1,5 +1,4 @@
-import { setValueById } from './domHelper.js';
-import { navigateToScreenById } from './routingService.js';
+import { navigateToPrefilledDetails } from './routingService.js';
 
 let locations = [
   {
@@ -38,19 +37,19 @@ const getIncrementalID = () => Math.max(...locations.map((loc) => loc.id)) + 1;
 
 const addLocation = (newLocation) => {
   locations = [...locations, newLocation];
-  nukeAndRebuildLocationsList();
+  refreshLocationsList();
 };
 
 const removeLocation = (id) => {
   locations = locations.filter((l) => l.id != id);
-  nukeAndRebuildLocationsList();
+  refreshLocationsList();
 };
 
 const updateLocation = (modifiedLocation) => {
   const { id } = modifiedLocation;
   removeLocation(id);
   locations = [...locations, modifiedLocation];
-  nukeAndRebuildLocationsList();
+  refreshLocationsList();
 };
 
 const createLocationListItem = (location) => {
@@ -99,36 +98,17 @@ const createLocationListItem = (location) => {
   return listItem;
 };
 
-function nukeAndRebuildLocationsList() {
-  // nuke
+function refreshLocationsList() {
+  // nuke existing locationsList
   const locationsList = document.getElementById('locations-list');
   locationsList.innerHTML = '';
-  // rebuild
+  // rebuild sorted locationsList from array
   locations
     .sort((a, b) => (a.id < b.id ? -1 : 1))
     .forEach((loc) => {
       locationsList.appendChild(createLocationListItem(loc));
     });
 }
-
-const navigateToPrefilledDetails = (element, location) => {
-  element.onclick = (e) => {
-    e?.preventDefault();
-    const { id, title, description, street, zipcode, lat, lon, score } =
-      location;
-    setValueById('modify-title', title);
-    setValueById('modify-description', description);
-    setValueById('modify-street', street);
-    setValueById('modify-zipcode', zipcode);
-    setValueById('modify-city', 'Berlin');
-    setValueById('modify-latitude', lat);
-    setValueById('modify-longitude', lon);
-    setValueById('modify-pollution', score);
-    document.getElementById('hidden-id-field').innerText = id;
-
-    navigateToScreenById('update-screen');
-  };
-};
 
 export {
   getIncrementalID,
@@ -137,5 +117,5 @@ export {
   updateLocation,
   locations,
   createLocationListItem,
-  nukeAndRebuildLocationsList,
+  refreshLocationsList,
 };
