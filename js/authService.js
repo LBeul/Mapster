@@ -9,11 +9,6 @@ const users = [
     isAdmin: false,
     password: 'password',
   },
-  {
-    id: 'a',
-    isAdmin: true,
-    password: 'a',
-  },
 ];
 
 const isValidUserData = (username, password) => {
