@@ -1,5 +1,3 @@
-import { navigateToScreenById } from './routingService.js';
-
 const deactivateById = (id) => {
   document.getElementById(id).style.display = 'none';
 };
@@ -35,6 +33,7 @@ const activateAdminControls = () => {
   enabledById('modify-picture');
   enabledById('modify-pollution');
   reactivateById('modify-btn');
+  reactivateById('delete-btn');
 };
 
 const revokeAdminControls = () => {
@@ -49,6 +48,7 @@ const revokeAdminControls = () => {
   disabledById('modify-picture');
   disabledById('modify-pollution');
   deactivateById('modify-btn');
+  deactivateById('delete-btn');
 };
 
 export {

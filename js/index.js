@@ -5,35 +5,37 @@ import {
   resetValueById,
   revokeAdminControls,
 } from './domHelper.js';
+import { removeLocation } from './locations.js';
 import {
   addLocation,
   getIncrementalID,
   nukeAndRebuildLocationsList,
+  updateLocation,
 } from './locations.js';
-import { addLocationMarker } from './mapService.js';
+import {
+  addLocationMarker,
+  deleteLocationMarker,
+  updateLocationMarker,
+} from './mapService.js';
 import { navigateOnClick, navigateToScreenById } from './routingService.js';
 
-// Starting
-window.onload = initializeSPA;
-
-function initializeSPA() {
-  // Start at login-screen
+// Initialize SPA
+window.onload = () => {
   navigateToScreenById('login-screen');
-
   // Initial load of stored Locations
   nukeAndRebuildLocationsList();
-
   // Form Bindings
   document.getElementById('login-form').onsubmit = clickLogin;
   document.getElementById('add-loc-form').onsubmit = clickAddLocation;
-
+  document.getElementById('update-loc-form').onsubmit = clickModifyLocation;
   // Button Bindings
   navigateOnClick('add-location-btn', 'add-screen');
   document.getElementById('logout').onclick = clickLogout;
   document.querySelectorAll('.back-to-main').forEach((element) => {
     element.onclick = (e) => navigateToScreenById('main-screen');
   });
-}
+  document.getElementById('delete-btn').onclick = clickDeleteLocation;
+};
 
 const clickLogin = (event) => {
   event.preventDefault();
@@ -89,4 +91,38 @@ const clickAddLocation = (event) => {
   resetValueById('add-longitude');
   resetValueById('add-picture');
   resetValueById('add-pollution');
+};
+
+const clickModifyLocation = (event) => {
+  event.preventDefault();
+  const id = document.getElementById('hidden-id-field').innerText;
+  const title = getValueById('modify-title');
+  const description = getValueById('modify-description');
+  const street = getValueById('modify-street');
+  const zipCode = getValueById('modify-zipcode');
+  const lat = getValueById('modify-latitude');
+  const lon = getValueById('modify-longitude');
+  const score = getValueById('modify-pollution');
+
+  const newLocation = {
+    id,
+    title,
+    lat,
+    lon,
+    street,
+    zipCode,
+    description,
+    score,
+  };
+  updateLocation(newLocation);
+  updateLocationMarker(newLocation);
+  navigateToScreenById('main-screen');
+};
+
+const clickDeleteLocation = (event) => {
+  event.preventDefault();
+  const id = document.getElementById('hidden-id-field').innerText;
+  removeLocation(id);
+  deleteLocationMarker(id);
+  navigateToScreenById('main-screen');
 };
