@@ -1,0 +1,84 @@
+:root {
+  /* BRAND COLOR PALETTE */
+  --brand-light: #d1eee8;
+  --brand: #14b8a6;
+  --brand-dark: #1e5850;
+
+  --danger: #e76256;
+
+  --white: #ffffff;
+  --gray-lightest: #f8f9f9;
+  --gray-lighter: #e4e6e5;
+  --gray-light: #d1d2d2;
+  --gray: #bebfbf;
+  --gray-dark: #969797;
+  --gray-darker: #6f7070;
+  --gray-darkest: #484949;
+  --black: #202121;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  background-color: var(--gray-lightest);
+  color: var(--black);
+}
+
+footer {
+  font-size: 12px;
+  height: 5vh;
+  background-color: var(--brand);
+  color: var(--white);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  height: 95vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container-content {
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.container-title {
+  display: flex;
+  height: 15vh;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--brand);
+  color: var(--white);
+  width: 100vw;
+}
+
+.simple-btn,
+input[type='button'],
+input[type='submit'],
+input[type='reset'] {
+  background-color: var(--brand);
+  border: none;
+  border-radius: 10px;
+  color: var(--gray-lightest);
+  padding: 10px 20px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}

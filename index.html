@@ -3,235 +3,271 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Custom styles & script -->
+    <link rel="stylesheet" href="./styles/index.css" />
     <link rel="stylesheet" href="./styles/main.css" />
-    <link rel="stylesheet" href="./styles/home.css" />
     <link rel="stylesheet" href="./styles/login.css" />
     <link rel="stylesheet" href="./styles/location.css" />
+    <script type="module" src="./js/index.js"></script>
+    <!-- Leaflet styles & script -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
     <title>Mapster</title>
   </head>
   <body>
-    <header>
-      <span>Mapster</span>
-      <nav>
-        <li>Home</li>
-        <li>Login</li>
-        <li>Add</li>
-        <li>Update</li>
-      </nav>
-    </header>
     <main>
       <!-- MAIN SCREEN -->
-      <section class="container">
-        <div class="container-title" id="home-title">
+      <section class="container" id="main-screen">
+        <div class="container-title" id="main-title">
           <h1>Willkommen bei Mapster</h1>
-          <p>
+          <h4>
             Die interaktive Sammlung von Vorschlägen für fehlende nachhaltige
             Infrastruktur in Berlin
-          </p>
+          </h4>
         </div>
-        <div class="home-content-wrapper">
-          <div class="content-row">
-            <div>
-              <h3>Locations</h3>
-              <ol>
-                <li>Rent a Bike Schöneweide</li>
-                <li>Mobiler Supermarkt Adlershof</li>
-                <li>E-Bike Ladesäulen Köpenick</li>
-              </ol>
-            </div>
-            <div>
-              <img class="map-container" src="./assets/map.jpg" />
-            </div>
-            <div class="btn-wrapper">
-              <button>Hinzufügen</button>
-              <button>Ausloggen</button>
-            </div>
-          </div>
-          <div class="content-row">
-            <footer>Impressum & Datenschutzerklärung</footer>
+        <div class="flex-col">
+          <div class="flex-row">
+            <div id="map"></div>
+            <aside class="map-legend">
+              <ul id="locations-list"></ul>
+              <div class="flex-row legend-buttons">
+                <button class="simple-btn" id="add-location-btn">
+                  Hinzufügen
+                </button>
+                <button class="simple-btn" id="logout">Ausloggen</button>
+              </div>
+            </aside>
           </div>
         </div>
       </section>
       <!-- LOGIN SCREEN -->
-      <section class="container">
+      <section class="container" id="login-screen">
         <div class="container-title">
           <h1>Mapster</h1>
         </div>
-        <form class="content-row">
-          <div>
+        <div class="container-content">
+          <form id="login-form">
             <label for="username">Nutzername</label>
-            <input type="text" name="username" required />
-          </div>
-          <div>
+            <input type="text" id="username" required />
             <label for="password">Passwort</label>
-            <input type="password" name="password" required />
-          </div>
-          <input type="submit" value="Einloggen" required />
-        </form>
+            <input type="password" id="password" required />
+            <input type="submit" value="Einloggen" id="login-btn" required />
+          </form>
+        </div>
       </section>
       <!-- ADD LOACTION SCREEN -->
-      <section class="container">
+      <section class="container" id="add-screen">
         <div class="container-title">
           <h1>Location hinzufügen</h1>
         </div>
-        <form class="location-form">
-          <div class="input-container">
-            <label for="name">Name</label>
+        <div class="container-content">
+          <form id="add-loc-form" class="location-form">
+            <div class="flex-col">
+              <label for="add-title">Name</label>
+              <input
+                type="text"
+                id="add-title"
+                placeholder="Kohletagebau  Wedding"
+                required
+              />
+            </div>
+            <div class="flex-col">
+              <label for="add-description">Beschreibung</label>
+              <input
+                type="text"
+                id="add-description"
+                placeholder="Massive Umweltbelastung"
+              />
+            </div>
+            <div class="flex-col">
+              <label for="add-street">Straße & Hausnummer</label>
+              <input type="text" id="add-street" placeholder="Hauptstraße 1" />
+            </div>
+            <div class="flex-col">
+              <label for="add-zipcode">Postleitzahl</label>
+              <input type="text" id="add-zipcode" placeholder="12489" />
+            </div>
+            <div class="flex-col">
+              <label for="add-city">Stadt</label>
+              <input
+                type="text"
+                id="add-city"
+                placeholder="Berlin"
+                value="Berlin"
+                disabled
+              />
+            </div>
+            <div class="flex-col">
+              <label for="add-latitude">Breitengrad</label>
+              <input
+                type="number"
+                step="any"
+                id="add-latitude"
+                placeholder="52.516275"
+              />
+            </div>
+            <div class="flex-col">
+              <label for="add-longitude">Längengrad</label>
+              <input
+                type="number"
+                step="any"
+                id="add-longitude"
+                placeholder="13.377704"
+              />
+            </div>
+            <div class="flex-col">
+              <label for="add-picture">Foto</label>
+              <input type="file" id="add-picture" accept="image/*" />
+            </div>
+            <div class="flex-col">
+              <label for="add-pollution">Verschmutzungsgrad</label>
+              <input
+                type="number"
+                id="add-pollution"
+                placeholder="1 bis 10"
+                min="1"
+                max="10"
+              />
+            </div>
+            <input type="submit" value="Hinzufügen" class="twocol-btn" />
             <input
-              type="text"
-              name="name"
-              placeholder="Kohletagebau  Wedding"
-              required
+              type="reset"
+              value="Abbrechen"
+              class="onecol-btn back-to-main"
             />
-          </div>
-          <div class="input-container">
-            <label for="description">Beschreibung</label>
-            <input
-              type="text"
-              name="description"
-              placeholder="Massive Umweltbelastung"
-            />
-          </div>
-          <div class="input-container">
-            <label for="street">Straße & Hausnummer</label>
-            <input
-              type="text"
-              name="street"
-              placeholder="Hauptstraße 1"
-              required
-            />
-          </div>
-          <div class="input-container">
-            <label for="zipcode">Postleitzahl</label>
-            <input type="text" name="zipcode" placeholder="12489" required />
-          </div>
-          <div class="input-container">
-            <label for="city">Stadt</label>
-            <input type="text" name="city" placeholder="Berlin" required />
-          </div>
-          <div class="input-container">
-            <label for="latitude">Breitengrad</label>
-            <input type="number" name="latitude" placeholder="52.516275" />
-          </div>
-          <div class="input-container">
-            <label for="longitude">Längengrad</label>
-            <input type="number" name="longitude" placeholder="13.377704" />
-          </div>
-          <div class="input-container">
-            <label for="picture">Foto</label>
-            <input type="file" name="picture" accept="image/*" />
-          </div>
-          <div class="input-container">
-            <label for="pollution">Verschmutzungsgrad</label>
-            <input
-              type="number"
-              name="pollution"
-              placeholder="1 bis 10"
-              min="1"
-              max="10"
-            />
-          </div>
-          <input type="submit" value="Hinzufügen" class="twocol-btn" />
-          <input type="reset" value="Abbrechen" class="onecol-btn" />
-        </form>
+          </form>
+        </div>
       </section>
       <!-- UPDATE LOCATION SCREEN -->
-      <section class="container">
+      <section class="container" id="update-screen">
         <div class="container-title">
-          <h1>Location bearbeiten</h1>
+          <h1>Location Details</h1>
         </div>
-        <form class="location-form">
-          <div class="input-container">
-            <label for="name">Name</label>
+        <form id="update-loc-form" class="location-form">
+          <div class="flex-col">
+            <div id="hidden-id-field" hidden></div>
+            <label for="modify-title">Name</label>
             <input
               type="text"
-              name="name"
+              id="modify-title"
               placeholder="Kohletagebau  Wedding"
               value="Kohletagebau  Wedding"
+              disabled
               required
             />
           </div>
-          <div class="input-container">
-            <label for="description">Beschreibung</label>
+          <div class="flex-col">
+            <label for="modify-description">Beschreibung</label>
             <input
               type="text"
-              name="description"
+              id="modify-description"
               placeholder="Massive Umweltbelastung"
               value="Massive Umweltbelastung"
+              disabled
             />
           </div>
-          <div class="input-container">
-            <label for="street">Straße & Hausnummer</label>
+          <div class="flex-col">
+            <label for="modify-street">Straße & Hausnummer</label>
             <input
               type="text"
-              name="street"
+              id="modify-street"
               placeholder="Hauptstraße 1"
               value="Hauptstraße 1"
-              required
+              disabled
             />
           </div>
-          <div class="input-container">
-            <label for="zipcode">Postleitzahl</label>
+          <div class="flex-col">
+            <label for="modify-zipcode">Postleitzahl</label>
             <input
               type="text"
-              name="zipcode"
+              id="modify-zipcode"
               placeholder="12489"
               value="12489"
-              required
+              disabled
             />
           </div>
-          <div class="input-container">
-            <label for="city">Stadt</label>
+          <div class="flex-col">
+            <label for="modify-city">Stadt</label>
             <input
               type="text"
-              name="city"
+              id="modify-city"
               placeholder="Berlin"
               value="Berlin"
-              required
+              disabled
             />
           </div>
-          <div class="input-container">
-            <label for="latitude">Breitengrad</label>
+          <div class="flex-col">
+            <label for="modify-latitude">Breitengrad</label>
             <input
               type="number"
-              name="latitude"
+              step="any"
+              id="modify-latitude"
               placeholder="52.516275"
               value="52.516275"
+              disabled
             />
           </div>
-          <div class="input-container">
-            <label for="longitude">Längengrad</label>
+          <div class="flex-col">
+            <label for="modify-longitude">Längengrad</label>
             <input
               type="number"
-              name="longitude"
+              step="any"
+              id="modify-longitude"
               placeholder="13.377704"
               value="13.377704"
+              disabled
             />
           </div>
-          <div class="input-container">
-            <label for="picture">Foto</label>
+          <div class="flex-col">
+            <label for="modify-picture">Foto</label>
             <input
               type="file"
-              name="picture"
+              id="modify-picture"
               accept="image/*"
               value="./assets/example.svg"
+              disabled
             />
           </div>
-          <div class="input-container">
-            <label for="pollution">Verschmutzungsgrad</label>
+          <div class="flex-col">
+            <label for="modify-pollution">Verschmutzungsgrad</label>
             <input
               type="number"
-              name="pollution"
+              id="modify-pollution"
               placeholder="1 bis 10"
               value="4"
               min="1"
               max="10"
+              disabled
             />
           </div>
-          <input type="submit" value="Hinzufügen" class="twocol-btn" />
-          <input type="reset" value="Abbrechen" class="onecol-btn" />
+          <input
+            id="modify-btn"
+            type="submit"
+            value="Überschreiben"
+            class="onecol-btn"
+            hidden
+          />
+          <input
+            id="delete-btn"
+            type="button"
+            value="Löschen"
+            class="onecol-btn"
+            hidden
+          />
+          <input type="reset" value="Zurück" class="onecol-btn back-to-main" />
         </form>
       </section>
+      <footer>Impressum & Datenschutzerklärung</footer>
     </main>
+    <script type="module" src="./js/mapService.js"></script>
   </body>
 </html>
