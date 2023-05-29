@@ -1,14 +1,15 @@
 import { isAdmin, isValidUserData } from './authService.js';
 import {
   activateAdminControls,
+  getFormValuesById,
   getValueById,
+  resetAddForm,
   resetValueById,
   revokeAdminControls,
 } from './domHelper.js';
 import { removeLocation } from './locations.js';
 import {
   addLocation,
-  getIncrementalID,
   nukeAndRebuildLocationsList,
   updateLocation,
 } from './locations.js';
@@ -61,59 +62,69 @@ const clickLogout = (event) => {
 
 const clickAddLocation = (event) => {
   event.preventDefault();
-  const title = getValueById('add-title');
-  const description = getValueById('add-description');
-  const street = getValueById('add-street');
-  const zipCode = getValueById('add-zipcode');
-  const lat = getValueById('add-latitude');
-  const lon = getValueById('add-longitude');
-  const picture = getValueById('add-picture');
-  const score = getValueById('add-pollution');
-  const id = getIncrementalID();
-  const newLocation = {
-    id,
-    title,
-    lat,
-    lon,
-    street,
-    zipCode,
-    description,
-    score,
-  };
-  addLocation(newLocation);
-  addLocationMarker(newLocation);
-  navigateToScreenById('main-screen');
-  resetValueById('add-title');
-  resetValueById('add-description');
-  resetValueById('add-street');
-  resetValueById('add-zipcode');
-  resetValueById('add-latitude');
-  resetValueById('add-longitude');
-  resetValueById('add-picture');
-  resetValueById('add-pollution');
+  const locationInput = getFormValuesById('add-loc-form');
+
+  const hasAdress = locationInput.street && locationInput.zipCode;
+  const hasCoords = locationInput.lat && locationInput.lon;
+
+  if (hasAdress) {
+    getCoordsAndAddLocation(locationInput);
+  } else if (hasCoords) {
+    getAddressAndAddLocation(locationInput);
+  } else {
+    alert('Bitte entweder Straße und PLZ oder Längen-/Breitengrad eintragen.');
+  }
+};
+
+const getCoordsAndAddLocation = (locationWithoutCoords) => {
+  const { street, zipCode } = locationWithoutCoords;
+  const addressString = `${street}, ${zipCode} Berlin`;
+  const url = `https://nominatim.openstreetmap.org/search?q=${addressString}&format=json`;
+
+  fetch(url)
+    .then((response) => response.json())
+    .catch((err) => console.log('Connecting to ' + url + ' failed!'))
+    .then((geoData) => {
+      const { lat, lon } = geoData[0];
+      const newLocation = { ...locationWithoutCoords, lat, lon };
+      console.log(newLocation);
+      addLocation(newLocation);
+      addLocationMarker(newLocation);
+      navigateToScreenById('main-screen');
+      resetAddForm();
+    });
+};
+
+const getAddressAndAddLocation = (locationWithoutAddress) => {
+  const { lat, lon } = locationWithoutAddress;
+  const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`;
+
+  fetch(url)
+    .then((response) => response.json())
+    .catch((err) => console.log('Connecting to ' + url + ' failed!'))
+    .then((geoData) => {
+      const { road, city, postcode } = geoData.address;
+      if (city !== 'Berlin') {
+        console.log(city);
+        alert('Gegebene Koordinaten liegen außerhalb Berlins.');
+      } else {
+        const newLocation = {
+          ...locationWithoutAddress,
+          street: road,
+          zipcode: postcode,
+        };
+        console.log(newLocation);
+        addLocation(newLocation);
+        addLocationMarker(newLocation);
+        navigateToScreenById('main-screen');
+        resetAddForm();
+      }
+    });
 };
 
 const clickModifyLocation = (event) => {
   event.preventDefault();
-  const id = document.getElementById('hidden-id-field').innerText;
-  const title = getValueById('modify-title');
-  const description = getValueById('modify-description');
-  const street = getValueById('modify-street');
-  const zipCode = getValueById('modify-zipcode');
-  const lat = getValueById('modify-latitude');
-  const lon = getValueById('modify-longitude');
-  const score = getValueById('modify-pollution');
-
-  const newLocation = {
-    id,
-    title,
-    lat,
-    lon,
-    street,
-    zipCode,
-    description,
-    score,
-  };
+  const newLocation = getFormValuesById('update-loc-form');
   updateLocation(newLocation);
   updateLocationMarker(newLocation);
   navigateToScreenById('main-screen');
