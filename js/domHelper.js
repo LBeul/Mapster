@@ -29,7 +29,6 @@ const activateAdminControls = () => {
   enabledById('modify-description');
   enabledById('modify-street');
   enabledById('modify-zipcode');
-  enabledById('modify-city');
   enabledById('modify-latitude');
   enabledById('modify-longitude');
   enabledById('modify-picture');
@@ -44,7 +43,6 @@ const revokeAdminControls = () => {
   disabledById('modify-description');
   disabledById('modify-street');
   disabledById('modify-zipcode');
-  disabledById('modify-city');
   disabledById('modify-latitude');
   disabledById('modify-longitude');
   disabledById('modify-picture');

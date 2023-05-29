@@ -1,5 +1,4 @@
-import { setValueById } from './domHelper.js';
-import { navigateToScreenById } from './routingService.js';
+import { navigateToPrefilledDetails } from './routingService.js';
 
 let locations = [
   {
@@ -110,25 +109,6 @@ function refreshLocationsList() {
       locationsList.appendChild(createLocationListItem(loc));
     });
 }
-
-const navigateToPrefilledDetails = (element, location) => {
-  element.onclick = (e) => {
-    e?.preventDefault();
-    const { id, title, description, street, zipcode, lat, lon, score } =
-      location;
-    setValueById('modify-title', title);
-    setValueById('modify-description', description);
-    setValueById('modify-street', street);
-    setValueById('modify-zipcode', zipcode);
-    setValueById('modify-city', 'Berlin');
-    setValueById('modify-latitude', lat);
-    setValueById('modify-longitude', lon);
-    setValueById('modify-pollution', score);
-    document.getElementById('hidden-id-field').innerText = id;
-
-    navigateToScreenById('update-screen');
-  };
-};
 
 export {
   getIncrementalID,
