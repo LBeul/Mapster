@@ -1,7 +1,7 @@
-import { locations } from './locations.js';
+import { locations } from "./locations.js";
 
-const map = L.map('map').setView([52.521, 13.413], 10);
-const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+const map = L.map("map").setView([52.521, 13.413], 10);
+const tiles = L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
   maxZoom: 19,
   attribution:
     '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -28,11 +28,14 @@ const addLocationMarker = (loc) => {
 const updateLocationMarker = (location) => {
   const oldMarker = markers.find((m) => m.id == location.id);
   map.removeLayer(oldMarker.marker);
+
+  markers = markers.filter((m) => m.id != location.id);
   addLocationMarker(location);
 };
 
 const deleteLocationMarker = (locationID) => {
   const oldMarker = markers.find((m) => m.id == locationID);
+  markers = markers.filter((m) => m.id != locationID);
   map.removeLayer(oldMarker.marker);
 };
 

@@ -1,7 +1,7 @@
-import { resetAddForm } from './domHelper.js';
-import { addLocation, updateLocation } from './locations.js';
-import { addLocationMarker, updateLocationMarker } from './mapService.js';
-import { navigateToScreenById } from './routingService.js';
+import { resetAddForm } from "./domHelper.js";
+import { addLocation, updateLocation } from "./locations.js";
+import { addLocationMarker, updateLocationMarker } from "./mapService.js";
+import { navigateToScreenById } from "./routingService.js";
 
 const getCoordsAndAddLocation = (locationWithoutCoords) => {
   const { street, zipCode } = locationWithoutCoords;
@@ -14,14 +14,14 @@ const getCoordsAndAddLocation = (locationWithoutCoords) => {
     .then((geoData) => {
       const locEntry = geoData?.[0];
       if (!locEntry?.lat) {
-        alert('Die angegebenen Adresse wurde nicht gefunden.');
+        alert("Die angegebenen Adresse wurde nicht gefunden.");
       } else {
         const { lat, lon } = locEntry;
         const newLocation = { ...locationWithoutCoords, lat, lon };
-        console.log('Added:', newLocation);
+        console.log("Added:", newLocation);
         addLocation(newLocation);
         addLocationMarker(newLocation);
-        navigateToScreenById('main-screen');
+        navigateToScreenById("main-screen");
         resetAddForm();
       }
     });
@@ -33,26 +33,25 @@ const getAddressAndAddLocation = (locationWithoutAddress) => {
 
   fetch(url)
     .then((response) => response.json())
-    .catch((err) => console.log('Connecting to ' + url + ' failed!'))
+    .catch((err) => console.log("Connecting to " + url + " failed!"))
     .then((geoData) => {
       const address = geoData?.address;
       if (!address?.road) {
-        alert('Die angegebenen Koordinaten sind ungültig');
+        alert("Die angegebenen Koordinaten sind ungültig");
       } else {
         const { road, city, postcode } = address;
-        if (city !== 'Berlin') {
-          console.log(city);
-          alert('Gegebene Koordinaten liegen außerhalb Berlins.');
+        if (city !== "Berlin") {
+          alert("Gegebene Koordinaten liegen außerhalb Berlins.");
         } else {
           const newLocation = {
             ...locationWithoutAddress,
             street: road,
-            zipcode: postcode,
+            zipCode: postcode,
           };
-          console.log('Added:', newLocation);
+          console.log("Added:", newLocation);
           addLocation(newLocation);
           addLocationMarker(newLocation);
-          navigateToScreenById('main-screen');
+          navigateToScreenById("main-screen");
           resetAddForm();
         }
       }
@@ -66,18 +65,18 @@ const getCoordsAndUpdateLocation = (locationWithoutCoords) => {
 
   fetch(url)
     .then((response) => response.json())
-    .catch((err) => console.log('Connecting to ' + url + ' failed!'))
+    .catch((err) => console.log("Connecting to " + url + " failed!"))
     .then((geoData) => {
       const locEntry = geoData?.[0];
       if (!locEntry?.lat) {
-        alert('Die angegebenen Adresse wurde nicht gefunden.');
+        alert("Die angegebenen Adresse wurde nicht gefunden.");
       } else {
         const { lat, lon } = geoData[0];
         const newLocation = { ...locationWithoutCoords, lat, lon };
-        console.log('Updated:', newLocation);
+        console.log("Updated:", newLocation);
         updateLocation(newLocation);
         updateLocationMarker(newLocation);
-        navigateToScreenById('main-screen');
+        navigateToScreenById("main-screen");
       }
     });
 };
@@ -88,26 +87,25 @@ const getAddressAndUpdateLocation = (locationWithoutAddress) => {
 
   fetch(url)
     .then((response) => response.json())
-    .catch((err) => console.log('Connecting to ' + url + ' failed!'))
+    .catch((err) => console.log("Connecting to " + url + " failed!"))
     .then((geoData) => {
       const address = geoData?.address;
       if (!address?.road) {
-        alert('Die angegebenen Koordinaten sind ungültig');
+        alert("Die angegebenen Koordinaten sind ungültig");
       } else {
         const { road, city, postcode } = geoData.address;
-        if (city !== 'Berlin') {
-          console.log(city);
-          alert('Gegebene Koordinaten liegen außerhalb Berlins.');
+        if (city !== "Berlin") {
+          alert("Gegebene Koordinaten liegen außerhalb Berlins.");
         } else {
           const newLocation = {
             ...locationWithoutAddress,
             street: road,
-            zipcode: postcode,
+            zipCode: postcode,
           };
-          console.log('Updated:', newLocation);
+          console.log("Updated:", newLocation);
           updateLocation(newLocation);
           updateLocationMarker(newLocation);
-          navigateToScreenById('main-screen');
+          navigateToScreenById("main-screen");
         }
       }
     });
