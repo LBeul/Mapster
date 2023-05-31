@@ -41,13 +41,12 @@ const getAddressAndAddLocation = (locationWithoutAddress) => {
       } else {
         const { road, city, postcode } = address;
         if (city !== 'Berlin') {
-          console.log(city);
           alert('Gegebene Koordinaten liegen außerhalb Berlins.');
         } else {
           const newLocation = {
             ...locationWithoutAddress,
             street: road,
-            zipcode: postcode,
+            zipCode: postcode,
           };
           console.log('Added:', newLocation);
           addLocation(newLocation);
@@ -96,13 +95,12 @@ const getAddressAndUpdateLocation = (locationWithoutAddress) => {
       } else {
         const { road, city, postcode } = geoData.address;
         if (city !== 'Berlin') {
-          console.log(city);
           alert('Gegebene Koordinaten liegen außerhalb Berlins.');
         } else {
           const newLocation = {
             ...locationWithoutAddress,
             street: road,
-            zipcode: postcode,
+            zipCode: postcode,
           };
           console.log('Updated:', newLocation);
           updateLocation(newLocation);

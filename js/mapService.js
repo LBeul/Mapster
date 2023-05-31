@@ -28,11 +28,14 @@ const addLocationMarker = (loc) => {
 const updateLocationMarker = (location) => {
   const oldMarker = markers.find((m) => m.id == location.id);
   map.removeLayer(oldMarker.marker);
+
+  markers = markers.filter((m) => m.id != location.id);
   addLocationMarker(location);
 };
 
 const deleteLocationMarker = (locationID) => {
   const oldMarker = markers.find((m) => m.id == locationID);
+  markers = markers.filter((m) => m.id != locationID);
   map.removeLayer(oldMarker.marker);
 };
 

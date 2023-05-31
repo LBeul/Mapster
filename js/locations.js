@@ -7,7 +7,7 @@ let locations = [
     lat: 52.52197645,
     lon: 13.413637435864272,
     street: 'Alexanderplatz',
-    zipcode: '12488',
+    zipCode: '12488',
     description: 'lorem ipsum dolor sit amet',
     score: 5,
   },
@@ -17,7 +17,7 @@ let locations = [
     lat: 52.4685507,
     lon: 13.5543359,
     street: 'An der Wuhlheide',
-    zipcode: '12488',
+    zipCode: '12488',
     description: 'lorem ipsum dolor sit amet',
     score: 10,
   },
@@ -27,13 +27,17 @@ let locations = [
     lat: 52.5166047,
     lon: 13.3809897,
     street: 'Unter den Linden',
-    zipcode: '12488',
+    zipCode: '12488',
     description: 'lorem ipsum dolor sit amet',
     score: 7,
   },
 ];
 
-const getIncrementalID = () => Math.max(...locations.map((loc) => loc.id)) + 1;
+const getIncrementalID = () => {
+  return locations.length === 0
+    ? 1
+    : Math.max(...locations?.map((loc) => loc?.id)) + 1;
+};
 
 const addLocation = (newLocation) => {
   locations = [...locations, newLocation];

@@ -43,6 +43,8 @@ const clickLogin = (event) => {
     navigateToScreenById('main-screen');
     if (isAdmin(username)) {
       activateAdminControls();
+    } else {
+      revokeAdminControls();
     }
   } else {
     alert('The provided credential combination does not exist');
