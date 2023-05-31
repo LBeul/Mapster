@@ -1,13 +1,13 @@
 const users = [
   {
-    id: "admina",
+    id: 'admina',
     isAdmin: true,
-    password: "password",
+    password: 'password',
   },
   {
-    id: "normalo",
+    id: 'normalo',
     isAdmin: false,
-    password: "password",
+    password: 'password',
   },
 ];
 
