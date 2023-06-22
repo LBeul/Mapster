@@ -25,6 +25,7 @@ Team **LoBe**: Louis Beul & Bettina Justus :octocat:
 - Run image as container and expose the default port: `docker run -d -p 27017:27017 --name wad-mongo -d mongodb/mongodb-community-server:latest`
 - Verify that container is running via `docker ps`
 - Open the database in mongoDB Compass using the default connection settings
+- After this setup, you can start & stop your container using `docker start wad-mongo` and `docker stop wad-mongo`
 
 ### Git Flow
 
