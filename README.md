@@ -2,41 +2,32 @@
 
 Team **LoBe**: Louis Beul & Bettina Justus :octocat:
 
-# Project Roadmap
+### Setup
 
-## General Idea
+- `frontend/...` runs in the browser without special requirements
+- `backend/...` is an npm project that has to be kicked-off:
+  - Enter with `cd backend/` and run `npm i` to install dependencies
+  - Run `npm start` to run the backend using [nodemon](https://www.npmjs.com/package/nodemon)
 
-- An interactive map of Berlin that shows climate-related information, i.e.
-  - ecologically destructive locations (e.g. fossile power plants)
-  - missing green infrastrcuture (e.g. missing park&ride spots)
+### Backend Dependencies
 
-## Technical Outline
+- **express** to streamline node server development
+- **morgan** to add simple & concise server logs
+- **cors** to enable local cross-origin development
+- **mongoose** as an ORM for mongoDB
+- **nodemon** as local dev environment with hot-reloading
+- **eslint** for linting & conventions
 
-- Single Page Application (SPA)
-- Front end in vanilla JS, HTML, and CSS
-- Back end in nodeJS
-- 2 user roles: admin & normal
+### Setup MongoDB using Docker
 
-### Increment 01:
+- Install `docker`
+- Pull the free mongodb image: `docker pull mongodb/mongodb-community-server`
+- Run image as container and expose the default port: `docker run -d -p 27017:27017 --name wad-mongo -d mongodb/mongodb-community-server:latest`
+- Verify that container is running via `docker ps`
+- Open the database in mongoDB Compass using the default connection settings
+- After this setup, you can start & stop your container using `docker start wad-mongo` and `docker stop wad-mongo`
 
-- Static HTML & CSS
-
-### Increment 02:
-
-- add JavaScript
-- no Backend
-- no DB/Server
-- 2 hardcoded users in JS
-- 4 to 6 hardcoded locations in JS
-
-### Increment 03:
-
-- add nodeJS Backend
-- add mongoDB
-
-# Miscellaneous
-
-### Git flow
+### Git Flow
 
 1. Never work directly on `main` -- new feature, new branch
 2. We use a `merge`-based flow, so avoid `rebase` on main
@@ -44,6 +35,6 @@ Team **LoBe**: Louis Beul & Bettina Justus :octocat:
 4. Ideally, have your PR approved before merging
 5. Keep your commit message short, expand to multi-line if necessary
 
-### Setup
+### Miscellanious
 
 - The `/.gitignore` was created using [gitignore.io](https://gitignore.io) and ignores all binary/config files related vim, vscode, nodeJS, and macOS.
