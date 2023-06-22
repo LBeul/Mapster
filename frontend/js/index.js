@@ -1,4 +1,3 @@
-import { isAdmin, isValidUserData } from './authService.js';
 import {
   activateAdminControls,
   getFormValuesById,
@@ -39,16 +38,31 @@ const clickLogin = (event) => {
   event.preventDefault();
   const username = getValueById('username');
   const password = getValueById('password');
-  if (isValidUserData(username, password)) {
-    navigateToScreenById('main-screen');
-    if (isAdmin(username)) {
-      activateAdminControls();
-    } else {
-      revokeAdminControls();
-    }
-  } else {
-    alert('The provided credential combination does not exist');
-  }
+
+  fetch('http://localhost:3003/auth', {
+    method: 'POST',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ username, password }),
+  })
+    .then((response) => {
+      if (response.status !== 200) {
+        throw new Error('Login data is invalid!');
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const { isAdmin } = data;
+      console.log(data);
+      if (isAdmin) {
+        activateAdminControls();
+      } else {
+        revokeAdminControls();
+      }
+      navigateToScreenById('main-screen');
+    })
+    .catch((error) => alert(error));
+
   resetValueById('username');
   resetValueById('password');
 };
