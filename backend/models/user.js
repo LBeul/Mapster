@@ -2,14 +2,13 @@ import mongoose from 'mongoose';
 
 // Define schema & model
 const userSchema = new mongoose.Schema({
-  username: { type: String, required: true, minlength: 3 },
+  userId: { type: String, required: true, minlength: 1 },
   password: { type: String, required: true },
-  role: { type: String, required: true },
+  isAdmin: { type: Boolean, required: true },
 });
 
 userSchema.set('toJSON', {
   transform: (_, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
     delete returnedObject.__v;
     delete returnedObject.password;
