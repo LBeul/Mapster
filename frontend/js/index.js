@@ -53,7 +53,6 @@ const clickLogin = (event) => {
     })
     .then((data) => {
       const { isAdmin } = data;
-      console.log(data);
       if (isAdmin) {
         activateAdminControls();
       } else {
