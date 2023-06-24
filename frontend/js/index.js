@@ -39,7 +39,7 @@ const clickLogin = (event) => {
   const username = getValueById('username');
   const password = getValueById('password');
 
-  fetch('http://localhost:3003/auth', {
+  fetch('http://localhost:3003/api/auth', {
     method: 'POST',
     mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
