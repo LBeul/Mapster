@@ -1,0 +1,12 @@
+POST http://localhost:3003/nonsusloc
+Content-Type: application/json
+
+{
+  "title": "Braunkohlegrube",
+  "lat": "52.5166047",
+  "lon": "13.3809897",
+  "street": "Unter den Linden",
+  "zipCode": "12488",
+  "description": "lorem ipsum dolor sit amet",
+  "score": "7"
+}

@@ -1,0 +1,13 @@
+PUT http://localhost:3003/nonsusloc/6496aff5eff33af8d6a6551a
+Content-Type: application/json
+
+{
+  "title": "Heizkraftwerk",
+  "lat": 52.52197645,
+  "lon": 13.413637435864272,
+  "street": "Alexanderplatz",
+  "zipCode": "12488",
+  "description": "lorem ipsum dolor sit amet",
+  "score": 5,
+  "id": "6496aff5eff33af8d6a6551a"
+}
