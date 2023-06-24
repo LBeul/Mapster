@@ -6,9 +6,8 @@ import {
   revokeAdminControls,
 } from './domHelper.js';
 import {
-  getAddressAndUpdateLocation,
-  getCoordsAndUpdateLocation,
   resolveAndAddLocation,
+  resolveAndUpdateLocation,
 } from './geoService.js';
 import { initializeLocations, removeLocation } from './locations.js';
 
@@ -76,15 +75,7 @@ const clickAddLocation = (event) => {
 const clickModifyLocation = (event) => {
   event.preventDefault();
   const locationInput = getFormValuesById('update-loc-form');
-  const hasAdress = locationInput.street && locationInput.zipCode;
-  const hasCoords = locationInput.lat && locationInput.lon;
-  if (hasAdress) {
-    getCoordsAndUpdateLocation(locationInput);
-  } else if (hasCoords) {
-    getAddressAndUpdateLocation(locationInput);
-  } else {
-    alert('Bitte entweder Straße und PLZ oder Längen-/Breitengrad eintragen.');
-  }
+  resolveAndUpdateLocation(locationInput);
 };
 
 const clickDeleteLocation = (event) => {
