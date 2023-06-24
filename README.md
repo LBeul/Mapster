@@ -18,7 +18,15 @@ Team **LoBe**: Louis Beul & Bettina Justus :octocat:
 - **nodemon** as local dev environment with hot-reloading
 - **eslint** for linting & conventions
 
-### Setup MongoDB using Docker
+### Environment Variables
+
+In order to get a locally working dev environment, you first need to setup the env variables.
+To do this, simply create a new file called `.env` in the root directory and copy the content of `.env.example` into it.
+
+It contains the `PORT` for express to listen to, as well as the MongoDB Atlas URL.
+In order to use this Atlas instance, you need a username && password.
+
+### Setup local MongoDB using Docker
 
 - Install `docker`
 - Pull the free mongodb image: `docker pull mongodb/mongodb-community-server`
