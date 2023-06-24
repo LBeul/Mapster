@@ -1,5 +1,3 @@
-import { getIncrementalID } from './locations.js';
-
 const deactivateById = (id) => {
   document.getElementById(id).style.display = 'none';
 };
@@ -71,8 +69,7 @@ const getFormValuesById = (formID) => {
     const lat = getValueById('add-latitude');
     const lon = getValueById('add-longitude');
     const score = getValueById('add-pollution');
-    const id = getIncrementalID();
-    return { title, description, street, zipCode, lat, lon, score, id };
+    return { title, description, street, zipCode, lat, lon, score };
   } else if (formID === 'update-loc-form') {
     const id = document.getElementById('hidden-id-field').innerText;
     const title = getValueById('modify-title');

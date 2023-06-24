@@ -1,55 +1,34 @@
+import { initializeMarkers } from './mapService.js';
 import { navigateToPrefilledDetails } from './routingService.js';
 
-let locations = [
-  {
-    id: 1,
-    title: 'Kernkraftwerk',
-    lat: 52.52197645,
-    lon: 13.413637435864272,
-    street: 'Alexanderplatz',
-    zipCode: '12488',
-    description: 'lorem ipsum dolor sit amet',
-    score: 5,
-  },
-  {
-    id: 2,
-    title: 'Heizkraftwerk',
-    lat: 52.4685507,
-    lon: 13.5543359,
-    street: 'An der Wuhlheide',
-    zipCode: '12488',
-    description: 'lorem ipsum dolor sit amet',
-    score: 10,
-  },
-  {
-    id: 3,
-    title: 'Braunkohlegrube',
-    lat: 52.5166047,
-    lon: 13.3809897,
-    street: 'Unter den Linden',
-    zipCode: '12488',
-    description: 'lorem ipsum dolor sit amet',
-    score: 7,
-  },
-];
+let locations = [];
 
-const getIncrementalID = () => {
-  return locations.length === 0
-    ? 1
-    : Math.max(...locations?.map((loc) => loc?.id)) + 1;
+const initializeLocations = () => {
+  fetch('http://localhost:3003/nonsusloc', {
+    cache: 'no-cache',
+  })
+    .then((response) => response.json())
+    .then((storedLocations) => {
+      locations = storedLocations;
+      refreshLocationsList();
+      initializeMarkers(locations);
+    });
 };
 
 const addLocation = (newLocation) => {
+  // TODO: POST to backend, get 201 & ID back
   locations = [...locations, newLocation];
   refreshLocationsList();
 };
 
 const removeLocation = (id) => {
+  // TODO: DELETE to backend, wait for 204
   locations = locations.filter((l) => l.id != id);
   refreshLocationsList();
 };
 
 const updateLocation = (modifiedLocation) => {
+  // TODO: PUT to backend, get 201 & ID back
   const { id } = modifiedLocation;
   removeLocation(id);
   locations = [...locations, modifiedLocation];
@@ -57,10 +36,9 @@ const updateLocation = (modifiedLocation) => {
 };
 
 const createLocationListItem = (location) => {
-  const { id, title, street, score } = location;
+  const { title, street, score } = location;
 
   // Text Elements
-  const idLabel = document.createTextNode(`${id}`);
   const titleLabel = document.createTextNode(title);
   const addressLabel = document.createTextNode(street);
   const scoreLabel = document.createTextNode(`Score: ${score}`);
@@ -86,7 +64,6 @@ const createLocationListItem = (location) => {
 
   let liNumber = document.createElement('div');
   liNumber.classList.add('li-number');
-  liNumber.appendChild(idLabel);
 
   let liContent = document.createElement('div');
   liContent.classList.add('li-content');
@@ -103,7 +80,7 @@ const createLocationListItem = (location) => {
 };
 
 function refreshLocationsList() {
-  // nuke existing locationsList
+  // clear existing locationsList
   const locationsList = document.getElementById('locations-list');
   locationsList.innerHTML = '';
   // rebuild sorted locationsList from array
@@ -115,11 +92,9 @@ function refreshLocationsList() {
 }
 
 export {
-  getIncrementalID,
   addLocation,
   removeLocation,
   updateLocation,
-  locations,
   createLocationListItem,
-  refreshLocationsList,
+  initializeLocations,
 };
