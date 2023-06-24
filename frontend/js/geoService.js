@@ -1,7 +1,7 @@
 import { resetAddForm } from './domHelper.js';
 import { addLocation, updateLocation } from './locations.js';
 import { addLocationMarker, updateLocationMarker } from './mapService.js';
-import { postLocation } from './requestHelper.js';
+import { postLocation, putLocation } from './requestHelper.js';
 import { navigateToScreenById } from './routingService.js';
 
 const retrieveCoordinatesForAddress = async (locationWithoutCoords) => {
@@ -57,7 +57,7 @@ const populateIncompleteLocation = async (inCompleteData) => {
   }
 };
 
-const resolveAndAddLocation = async (locationInput) => {
+export const resolveAndAddLocation = async (locationInput) => {
   try {
     const populatedLocation = await populateIncompleteLocation(locationInput);
     console.log(populatedLocation);
@@ -74,61 +74,18 @@ const resolveAndAddLocation = async (locationInput) => {
   }
 };
 
-const getCoordsAndUpdateLocation = (locationWithoutCoords) => {
-  const { street, zipCode } = locationWithoutCoords;
-  const addressString = `${street}, ${zipCode} Berlin`;
-  const url = `https://nominatim.openstreetmap.org/search?q=${addressString}&format=json`;
-
-  fetch(url)
-    .then((response) => response.json())
-    .catch((err) => console.log('Connecting to ' + url + ' failed!'))
-    .then((geoData) => {
-      const locEntry = geoData?.[0];
-      if (!locEntry?.lat) {
-        alert('Die angegebenen Adresse wurde nicht gefunden.');
-      } else {
-        const { lat, lon } = geoData[0];
-        const newLocation = { ...locationWithoutCoords, lat, lon };
-        console.log('Updated:', newLocation);
-        updateLocation(newLocation);
-        updateLocationMarker(newLocation);
-        navigateToScreenById('main-screen');
-      }
-    });
-};
-
-const getAddressAndUpdateLocation = (locationWithoutAddress) => {
-  const { lat, lon } = locationWithoutAddress;
-  const url = `https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`;
-
-  fetch(url)
-    .then((response) => response.json())
-    .catch((err) => console.log('Connecting to ' + url + ' failed!'))
-    .then((geoData) => {
-      const address = geoData?.address;
-      if (!address?.road) {
-        alert('Die angegebenen Koordinaten sind ungültig');
-      } else {
-        const { road, city, postcode } = geoData.address;
-        if (city !== 'Berlin') {
-          alert('Gegebene Koordinaten liegen außerhalb Berlins.');
-        } else {
-          const newLocation = {
-            ...locationWithoutAddress,
-            street: road,
-            zipCode: postcode,
-          };
-          console.log('Updated:', newLocation);
-          updateLocation(newLocation);
-          updateLocationMarker(newLocation);
-          navigateToScreenById('main-screen');
-        }
-      }
-    });
-};
-
-export {
-  resolveAndAddLocation,
-  getAddressAndUpdateLocation,
-  getCoordsAndUpdateLocation,
+export const resolveAndUpdateLocation = async (locationInput) => {
+  try {
+    const populatedLocation = await populateIncompleteLocation(locationInput);
+    const { id } = populatedLocation;
+    const apiResponse = await putLocation(id, populatedLocation);
+    if (!apiResponse.ok) throw new Error(apiResponse.status);
+    const newLocation = await apiResponse.json();
+    updateLocation(newLocation);
+    updateLocationMarker(newLocation);
+    navigateToScreenById('main-screen');
+    console.log('Updated:', newLocation);
+  } catch (error) {
+    alert(error);
+  }
 };

@@ -8,11 +8,18 @@ export const sendAuthRequest = (username, password) =>
     body: JSON.stringify({ username, password }),
   });
 
-export const postLocation = (locationData) => {
-  return fetch(`${api}/nonsusloc`, {
+export const postLocation = (locationData) =>
+  fetch(`${api}/nonsusloc`, {
     method: 'POST',
     mode: 'cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(locationData),
   });
-};
+
+export const putLocation = (id, locationData) =>
+  fetch(`${api}/nonsusloc/${id}`, {
+    method: 'PUT',
+    mode: 'cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(locationData),
+  });
