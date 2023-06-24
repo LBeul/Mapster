@@ -11,16 +11,17 @@ import {
   getCoordsAndAddLocation,
   getCoordsAndUpdateLocation,
 } from './geoService.js';
-import { removeLocation } from './locations.js';
-import { refreshLocationsList } from './locations.js';
+import { initializeLocations, removeLocation } from './locations.js';
+
 import { deleteLocationMarker } from './mapService.js';
+import { sendAuthRequest } from './requestHelper.js';
 import { navigateOnClick, navigateToScreenById } from './routingService.js';
 
 // Initialize SPA
 window.onload = () => {
   navigateToScreenById('login-screen');
-  // Initial load of stored Locations
-  refreshLocationsList();
+  // Initial load of stored Locations;
+  initializeLocations();
   // Form Bindings
   document.getElementById('login-form').onsubmit = clickLogin;
   document.getElementById('add-loc-form').onsubmit = clickAddLocation;
@@ -39,12 +40,7 @@ const clickLogin = (event) => {
   const username = getValueById('username');
   const password = getValueById('password');
 
-  fetch('http://localhost:3003/users', {
-    method: 'POST',
-    mode: 'cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ username, password }),
-  })
+  sendAuthRequest(username, password)
     .then((response) => {
       if (response.status !== 200) {
         throw new Error('Login data is invalid!');
