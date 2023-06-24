@@ -9,21 +9,21 @@ let markers = [];
 
 const initializeMarkers = (locations) => {
   markers = locations.map((loc) => {
-    const { id, lat, lon, title, description, score } = loc;
+    const { id, lat, lon, title, street, score } = loc;
     const marker = L.marker([lat, lon]).addTo(map);
-    marker.bindPopup(formatPopup(title, description, score));
+    marker.bindPopup(formatPopup(title, street, score));
     return { id, marker };
   });
 };
 
-function formatPopup(title, description, score) {
-  return `<h3>${title}</h3><p>${description}</p><h5>Score: ${score}</h5>`;
+function formatPopup(title, street, score) {
+  return `<h3>${title}</h3><p>${street}</p><h5>Score: ${score ?? '--'}</h5>`;
 }
 
 const addLocationMarker = (loc) => {
-  const { id, lat, lon, title, description, score } = loc;
+  const { id, lat, lon, title, street, score } = loc;
   const marker = L.marker([lat, lon]).addTo(map);
-  marker.bindPopup(formatPopup(title, description, score));
+  marker.bindPopup(formatPopup(title, street, score));
   markers = [...markers, { id, marker }];
 };
 

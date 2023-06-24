@@ -43,20 +43,23 @@ const retrieveAddressForCoordinates = async (locationWithoutAddress) => {
   return newLocation;
 };
 
+const populateIncompleteLocation = async (inCompleteData) => {
+  const hasAdress = inCompleteData.street && inCompleteData.zipCode;
+  const hasCoords = inCompleteData.lat && inCompleteData.lon;
+  if (hasAdress) {
+    return retrieveCoordinatesForAddress(inCompleteData);
+  } else if (hasCoords) {
+    return retrieveAddressForCoordinates(inCompleteData);
+  } else {
+    throw new Error(
+      'Bitte entweder Straße und PLZ oder Längen-/Breitengrad eintragen.'
+    );
+  }
+};
+
 const resolveAndAddLocation = async (locationInput) => {
-  const hasAdress = locationInput.street && locationInput.zipCode;
-  const hasCoords = locationInput.lat && locationInput.lon;
-  let populatedLocation;
   try {
-    if (hasAdress) {
-      populatedLocation = await retrieveCoordinatesForAddress(locationInput);
-    } else if (hasCoords) {
-      populatedLocation = await retrieveAddressForCoordinates(locationInput);
-    } else {
-      throw new Error(
-        'Bitte entweder Straße und PLZ oder Längen-/Breitengrad eintragen.'
-      );
-    }
+    const populatedLocation = await populateIncompleteLocation(locationInput);
     console.log(populatedLocation);
     const apiResponse = await postLocation(populatedLocation);
     if (!apiResponse.ok) throw new Error(apiResponse.status);
