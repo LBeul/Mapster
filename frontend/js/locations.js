@@ -1,12 +1,11 @@
 import { initializeMarkers } from './mapService.js';
+import { deleteLocation, getLocations } from './requestHelper.js';
 import { navigateToPrefilledDetails } from './routingService.js';
 
 let locations = [];
 
 const initializeLocations = () => {
-  fetch('http://localhost:3003/nonsusloc', {
-    cache: 'no-cache',
-  })
+  getLocations()
     .then((response) => response.json())
     .then((storedLocations) => {
       locations = storedLocations;
@@ -20,10 +19,15 @@ const addLocation = (newLocation) => {
   refreshLocationsList();
 };
 
-const removeLocation = (id) => {
-  // TODO: DELETE to backend, wait for 204
-  locations = locations.filter((l) => l.id != id);
-  refreshLocationsList();
+const removeLocation = async (id) => {
+  try {
+    const response = await deleteLocation(id);
+    if (!response.ok) throw new Error(response.status);
+    locations = locations.filter((l) => l.id != id);
+    refreshLocationsList();
+  } catch (error) {
+    alert(error);
+  }
 };
 
 const updateLocation = (modifiedLocation) => {
