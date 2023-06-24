@@ -27,7 +27,6 @@ const removeLocation = (id) => {
 };
 
 const updateLocation = (modifiedLocation) => {
-  // TODO: PUT to backend, get 201 & ID back
   const { id } = modifiedLocation;
   removeLocation(id);
   locations = [...locations, modifiedLocation];
