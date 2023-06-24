@@ -10,9 +10,9 @@ locationsRouter.get('/', (_, response) => {
 
 // GET location by id
 locationsRouter.get('/:id', async (request, response) => {
-  const note = await Location.findById(request.params.id);
-  if (note) {
-    response.json(note.toJSON());
+  const location = await Location.findById(request.params.id);
+  if (location) {
+    response.json(location.toJSON());
   } else {
     response.status(404).end();
   }
