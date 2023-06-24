@@ -4,6 +4,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 import 'dotenv/config';
 import authRouter from './controllers/auth.js';
+import locationsRouter from './controllers/locations.js';
+import errorHandler from './utils/errorHandler.js';
 
 const app = express();
 
@@ -19,43 +21,10 @@ app.use(express.json());
 app.use(morgan('tiny'));
 
 // Invoke routers
-app.use('/api/auth', authRouter);
+app.use('/users', authRouter);
+app.use('/nonsusloc', locationsRouter);
 
-let locations = [
-  {
-    id: 1,
-    title: 'Kernkraftwerk',
-    lat: 52.52197645,
-    lon: 13.413637435864272,
-    street: 'Alexanderplatz',
-    zipCode: '12488',
-    description: 'lorem ipsum dolor sit amet',
-    score: 5,
-  },
-  {
-    id: 2,
-    title: 'Heizkraftwerk',
-    lat: 52.4685507,
-    lon: 13.5543359,
-    street: 'An der Wuhlheide',
-    zipCode: '12488',
-    description: 'lorem ipsum dolor sit amet',
-    score: 10,
-  },
-  {
-    id: 3,
-    title: 'Braunkohlegrube',
-    lat: 52.5166047,
-    lon: 13.3809897,
-    street: 'Unter den Linden',
-    zipCode: '12488',
-    description: 'lorem ipsum dolor sit amet',
-    score: 7,
-  },
-];
-
-app.get('/api/locations', (_, response) => {
-  response.json(locations);
-});
+// Use custom error handler
+app.use(errorHandler);
 
 export default app;
