@@ -6,10 +6,9 @@ import {
   revokeAdminControls,
 } from './domHelper.js';
 import {
-  getAddressAndAddLocation,
   getAddressAndUpdateLocation,
-  getCoordsAndAddLocation,
   getCoordsAndUpdateLocation,
+  resolveAndAddLocation,
 } from './geoService.js';
 import { initializeLocations, removeLocation } from './locations.js';
 
@@ -42,7 +41,7 @@ const clickLogin = (event) => {
 
   sendAuthRequest(username, password)
     .then((response) => {
-      if (response.status !== 200) {
+      if (!response.ok) {
         throw new Error('Login data is invalid!');
       }
       return response.json();
@@ -71,16 +70,7 @@ const clickLogout = (event) => {
 const clickAddLocation = (event) => {
   event.preventDefault();
   const locationInput = getFormValuesById('add-loc-form');
-  const hasAdress = locationInput.street && locationInput.zipCode;
-  const hasCoords = locationInput.lat && locationInput.lon;
-
-  if (hasAdress) {
-    getCoordsAndAddLocation(locationInput);
-  } else if (hasCoords) {
-    getAddressAndAddLocation(locationInput);
-  } else {
-    alert('Bitte entweder Straße und PLZ oder Längen-/Breitengrad eintragen.');
-  }
+  resolveAndAddLocation(locationInput);
 };
 
 const clickModifyLocation = (event) => {

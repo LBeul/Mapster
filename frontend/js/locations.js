@@ -16,7 +16,6 @@ const initializeLocations = () => {
 };
 
 const addLocation = (newLocation) => {
-  // TODO: POST to backend, get 201 & ID back
   locations = [...locations, newLocation];
   refreshLocationsList();
 };
@@ -41,7 +40,7 @@ const createLocationListItem = (location) => {
   // Text Elements
   const titleLabel = document.createTextNode(title);
   const addressLabel = document.createTextNode(street);
-  const scoreLabel = document.createTextNode(`Score: ${score}`);
+  const scoreLabel = document.createTextNode(`Score: ${score ?? '--'}`);
   const btnLabel = document.createTextNode('Details');
 
   // Dom Nodes
