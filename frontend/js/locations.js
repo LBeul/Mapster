@@ -9,14 +9,14 @@ const initializeLocations = () => {
     .then((response) => response.json())
     .then((storedLocations) => {
       locations = storedLocations;
-      refreshLocationsList();
+      refreshLocalLocationsList();
       initializeMarkers(locations);
     });
 };
 
 const addLocation = (newLocation) => {
   locations = [...locations, newLocation];
-  refreshLocationsList();
+  refreshLocalLocationsList();
 };
 
 const removeLocation = async (id) => {
@@ -24,7 +24,7 @@ const removeLocation = async (id) => {
     const response = await deleteLocation(id);
     if (!response.ok) throw new Error(response.status);
     locations = locations.filter((l) => l.id != id);
-    refreshLocationsList();
+    refreshLocalLocationsList();
   } catch (error) {
     alert(error);
   }
@@ -32,9 +32,8 @@ const removeLocation = async (id) => {
 
 const updateLocation = (modifiedLocation) => {
   const { id } = modifiedLocation;
-  removeLocation(id);
-  locations = [...locations, modifiedLocation];
-  refreshLocationsList();
+  locations = [...locations.filter((l) => l.id != id), modifiedLocation];
+  refreshLocalLocationsList();
 };
 
 const createLocationListItem = (location) => {
@@ -81,7 +80,7 @@ const createLocationListItem = (location) => {
   return listItem;
 };
 
-function refreshLocationsList() {
+function refreshLocalLocationsList() {
   // clear existing locationsList
   const locationsList = document.getElementById('locations-list');
   locationsList.innerHTML = '';
