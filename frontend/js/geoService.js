@@ -60,7 +60,6 @@ const populateIncompleteLocation = async (inCompleteData) => {
 export const resolveAndAddLocation = async (locationInput) => {
   try {
     const populatedLocation = await populateIncompleteLocation(locationInput);
-    console.log(populatedLocation);
     const apiResponse = await postLocation(populatedLocation);
     if (!apiResponse.ok) throw new Error(apiResponse.status);
     const newLocation = await apiResponse.json();
@@ -68,7 +67,6 @@ export const resolveAndAddLocation = async (locationInput) => {
     addLocationMarker(newLocation);
     navigateToScreenById('main-screen');
     resetAddForm();
-    console.log('Added:', newLocation);
   } catch (error) {
     alert(error);
   }
@@ -84,7 +82,6 @@ export const resolveAndUpdateLocation = async (locationInput) => {
     updateLocation(newLocation);
     updateLocationMarker(newLocation);
     navigateToScreenById('main-screen');
-    console.log('Updated:', newLocation);
   } catch (error) {
     alert(error);
   }
